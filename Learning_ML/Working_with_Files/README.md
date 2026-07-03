@@ -1,69 +1,187 @@
 # 📂 Working with Files
 
-This folder contains my Jupyter notebooks focused on learning how to efficiently work with datasets in Python.
+This folder contains my Jupyter notebooks focused on learning how to import, access, and work with data stored in different file formats and data sources using Python.
 
-The primary objective is to understand how data is loaded, inspected, and managed before moving on to preprocessing and machine learning tasks.
+Data ingestion is the first step in every Machine Learning workflow. Before cleaning, analyzing, or modeling data, it is essential to know how to retrieve datasets from multiple sources such as CSV files, JSON documents, APIs, and relational databases.
+
+The notebooks in this folder document my learning journey as I explore these different data sources using Pandas and related Python libraries.
 
 ---
 
-## 📘 Current Topics
+# 📚 Topics Covered
 
-### Working with CSV Files
+## 📄 Working with CSV Files
 
-In this section, I explored the `pandas.read_csv()` function in detail and learned how different parameters affect the way datasets are imported.
+This notebook explores the `pandas.read_csv()` function in depth and demonstrates how various parameters can be used to efficiently import CSV datasets.
 
-Topics covered include:
+### Concepts Covered
 
 - Reading CSV files
-- Loading datasets from different locations
-- Selecting specific columns
-- Handling missing values during import
-- Skipping rows
-- Reading a fixed number of rows
+- Loading datasets from local storage
+- Reading datasets directly from URLs
+- Selecting specific columns using `usecols`
+- Reading only a subset of rows using `nrows`
+- Skipping rows with `skiprows`
+- Specifying custom column names
 - Setting index columns
+- Handling missing values during import
 - Parsing date columns
-- Reading large datasets efficiently
-- Managing headers
-- Understanding data types while importing
+- Changing delimiters using `sep`
+- Controlling data types using `dtype`
+- Loading large datasets efficiently using `chunksize`
 - Basic inspection of imported datasets
 
----
+### Skills Learned
 
-## 🎯 Learning Outcome
-
-After completing these notebooks, I gained a strong understanding of:
-
-- Importing CSV datasets using Pandas
-- Exploring datasets immediately after loading
-- Using important parameters of `pd.read_csv()`
-- Preparing datasets for further preprocessing and analysis
-- Building a solid foundation for data manipulation tasks
+- Understanding the flexibility of `pd.read_csv()`
+- Efficiently importing datasets
+- Reducing memory usage while loading data
+- Preparing datasets for preprocessing and analysis
 
 ---
 
-## 📚 Technologies Used
+## 🌐 Working with JSON
+
+This notebook demonstrates how to work with JSON data using Pandas.
+
+### Concepts Covered
+
+- Reading JSON files using `pd.read_json()`
+- Importing JSON datasets from online sources
+- Understanding JSON structure
+- Working with nested JSON data
+- Reading JSON responses from REST APIs
+- Exploring API-generated datasets
+
+### Example Datasets
+
+- Recipe dataset in JSON format
+- Currency Exchange Rate API
+
+### Skills Learned
+
+- Importing JSON datasets
+- Accessing API data directly in Python
+- Converting JSON responses into Pandas DataFrames
+- Preparing semi-structured data for analysis
+
+---
+
+## 🗄️ Working with SQL Databases
+
+This notebook introduces database connectivity using MySQL and Pandas.
+
+### Concepts Covered
+
+- Installing MySQL Connector
+- Connecting Python to a MySQL database
+- Creating database connections
+- Executing SQL queries
+- Importing SQL query results into Pandas DataFrames
+- Exploring relational database tables
+
+### Libraries Used
+
+- mysql-connector-python
+- pandas
+
+### Example SQL Query
+
+```sql
+SELECT * FROM countrylanguage;
+```
+
+### Skills Learned
+
+- Connecting Python applications to databases
+- Retrieving data using SQL
+- Integrating SQL query results with Pandas
+- Building the foundation for data engineering and Machine Learning workflows
+
+---
+
+# 🛠️ Technologies Used
 
 - Python
-- Pandas
 - Jupyter Notebook
+- Pandas
+- MySQL
+- mysql-connector-python
 
 ---
 
-## 🚀 Future Additions
+# 📌 Key Functions Explored
 
-This folder will continue to expand as I explore working with different file formats and data sources, including:
+## CSV
+
+- `pd.read_csv()`
+
+Important parameters explored:
+
+- `filepath_or_buffer`
+- `sep`
+- `header`
+- `names`
+- `index_col`
+- `usecols`
+- `skiprows`
+- `nrows`
+- `dtype`
+- `parse_dates`
+- `na_values`
+- `chunksize`
+
+---
+
+## JSON
+
+- `pd.read_json()`
+
+---
+
+## SQL
+
+- `mysql.connector.connect()`
+- `pd.read_sql_query()`
+
+---
+
+# 🎯 Learning Outcomes
+
+Through these notebooks, I learned how to:
+
+- Import datasets from multiple file formats
+- Load structured and semi-structured data into Pandas
+- Read data directly from online sources
+- Consume REST API responses
+- Connect Python to relational databases
+- Execute SQL queries from Python
+- Convert database query results into DataFrames
+- Prepare datasets for preprocessing, exploratory data analysis (EDA), and machine learning
+
+---
+
+# 🚀 Future Topics
+
+This folder will continue to grow as I learn to work with additional data sources, including:
 
 - Excel Files
-- JSON Files
-- SQL Databases
-- APIs
-- Pickle Files
+- XML Files
 - Parquet Files
 - Feather Files
-- HDF5
+- Pickle Files
+- SQLite
+- PostgreSQL
+- MongoDB
+- APIs with Authentication
 - Web Scraping
-- Reading data from cloud storage
+- Cloud Storage (AWS S3, Google Cloud Storage)
+- Data Warehouses
 
 ---
 
-Every notebook in this folder focuses on understanding both the practical implementation and the reasoning behind each technique, helping build a strong foundation for data analysis and machine learning workflows.
+# 💡 Why This Matters
+
+Real-world Machine Learning projects rarely begin with clean CSV files. Data is commonly stored across databases, APIs, cloud storage, and various file formats.
+
+Developing the ability to efficiently retrieve and integrate data from these diverse sources is a fundamental skill for every Data Scientist and Machine Learning Engineer. These notebooks document my progress toward building that foundation through hands-on practice and experimentation.
