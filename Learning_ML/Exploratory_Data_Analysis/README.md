@@ -391,3 +391,329 @@ As I continue learning, this folder will grow with additional notebooks covering
 - Real-world EDA Case Studies
 
 Each notebook represents another step in my journey toward becoming a better Data Scientist and Machine Learning Engineer by learning not just **how** to perform EDA, but also **why** each technique is important.
+
+
+---
+
+
+# 📊 Lesson 3 — Multivariate Analysis
+
+After analyzing individual features through Univariate Analysis, the next step is to understand **how multiple variables interact with one another**.
+
+Multivariate Analysis focuses on studying relationships among two or more variables simultaneously. It helps uncover hidden patterns, identify correlations, compare distributions across groups, and gain deeper insights into the dataset before building Machine Learning models.
+
+In this notebook, I explored various visualization techniques for analyzing relationships between **numerical** and **categorical** variables using real-world datasets such as **Titanic**, **Tips**, **Flights**, and **Iris**.
+
+---
+
+# 📚 Topics Covered
+
+## Numerical vs Numerical
+
+* Scatter Plot
+* Line Plot
+
+---
+
+## Numerical vs Categorical
+
+* Bar Plot
+* Box Plot
+* Distribution Plot (KDE)
+
+---
+
+## Categorical vs Categorical
+
+* Heatmap
+* Clustermap
+* Crosstab Analysis
+
+---
+
+## Multiple Variable Visualization
+
+* Pair Plot
+* Heatmap using Pivot Tables
+
+---
+
+# 📝 1. Scatter Plot (Numerical vs Numerical)
+
+Scatter plots help visualize the relationship between two numerical variables.
+
+They are useful for identifying:
+
+* Positive correlation
+* Negative correlation
+* Clusters
+* Outliers
+* General trends
+
+```python
+sns.scatterplot(x='total_bill', y='tip', data=tips)
+```
+
+To visualize additional variables, different aesthetics such as color, marker style, and point size can be used.
+
+```python
+sns.scatterplot(
+    x='total_bill',
+    y='tip',
+    data=tips,
+    hue='sex',
+    style='smoker',
+    size='size'
+)
+```
+
+---
+
+# 📝 2. Bar Plot (Numerical vs Categorical)
+
+Bar plots compare the average value of a numerical feature across different categories.
+
+Example:
+
+```python
+sns.barplot(
+    x=titanic['Pclass'],
+    y=titanic['Fare'],
+    hue=titanic['Sex']
+)
+```
+
+This makes it easy to compare average fares across passenger classes and genders.
+
+---
+
+# 📝 3. Box Plot (Numerical vs Categorical)
+
+Box plots summarize the distribution of a numerical variable across categories while highlighting potential outliers.
+
+```python
+sns.boxplot(
+    x=titanic['Sex'],
+    y=titanic['Age'],
+    hue=titanic['Survived']
+)
+```
+
+Box plots provide information about:
+
+* Median
+* Quartiles
+* Spread
+* Outliers
+* Distribution differences between groups
+
+---
+
+# 📝 4. Distribution Plot (KDE)
+
+Distribution plots compare how a numerical variable is distributed across different categories.
+
+```python
+sns.distplot(
+    titanic[titanic['Survived'] == 0]['Age'],
+    hist=False
+)
+
+sns.distplot(
+    titanic[titanic['Survived'] == 1]['Age'],
+    hist=False
+)
+```
+
+This helps compare the age distributions of passengers who survived versus those who did not.
+
+---
+
+# 📝 5. Heatmap (Categorical vs Categorical)
+
+Heatmaps are commonly created using a **Crosstab** to visualize relationships between two categorical variables.
+
+```python
+pd.crosstab(
+    titanic['Pclass'],
+    titanic['Survived']
+)
+```
+
+Visualizing the crosstab:
+
+```python
+sns.heatmap(
+    pd.crosstab(
+        titanic['Pclass'],
+        titanic['Survived']
+    )
+)
+```
+
+Using percentages often provides a clearer understanding of category-wise comparisons.
+
+```python
+titanic.groupby('Pclass')['Survived'].mean() * 100
+```
+
+---
+
+# 📝 6. Clustermap
+
+A Clustermap extends a heatmap by grouping similar rows and columns together.
+
+```python
+sns.clustermap(
+    pd.crosstab(
+        titanic['Parch'],
+        titanic['Survived']
+    )
+)
+```
+
+This visualization helps identify similar patterns and clusters among categorical variables.
+
+---
+
+# 📝 7. Pair Plot
+
+Pair plots display pairwise relationships between multiple numerical features in a dataset.
+
+```python
+sns.pairplot(
+    iris,
+    hue='species'
+)
+```
+
+Pair plots are extremely useful for:
+
+* Exploring feature relationships
+* Detecting clusters
+* Identifying class separability
+* Spotting outliers
+
+---
+
+# 📝 8. Line Plot
+
+Line plots are ideal for analyzing trends over time or across ordered observations.
+
+```python
+new = flights.groupby('year')['passengers'].sum().reset_index()
+
+sns.lineplot(
+    x=new['year'],
+    y=new['passengers']
+)
+```
+
+This helps visualize how passenger counts change over the years.
+
+---
+
+# 📝 9. Pivot Table Heatmap
+
+Pivot tables can summarize data across two dimensions, and a heatmap provides an intuitive visualization of the summarized values.
+
+```python
+flights.pivot_table(
+    values='passengers',
+    index='month',
+    columns='year'
+)
+```
+
+```python
+sns.heatmap(
+    flights.pivot_table(
+        values='passengers',
+        index='month',
+        columns='year'
+    )
+)
+```
+
+This visualization clearly highlights seasonal patterns and yearly trends.
+
+---
+
+# 📸 Notebook Preview
+
+## Scatter Plot & Bar Plot
+
+*(Add screenshots from your notebook here.)*
+
+```markdown
+![Scatter Plot](./your_screenshot_name.png)
+```
+
+---
+
+## Box Plot & Distribution Plot
+
+*(Add screenshots of box plots and KDE plots.)*
+
+```markdown
+![Box Plot](./your_screenshot_name.png)
+```
+
+---
+
+## Heatmap & Clustermap
+
+*(Add screenshots of categorical relationship visualizations.)*
+
+```markdown
+![Heatmap](./your_screenshot_name.png)
+```
+
+---
+
+## Pair Plot & Line Plot
+
+*(Add screenshots of pair plots and line plots.)*
+
+```markdown
+![Pair Plot](./your_screenshot_name.png)
+```
+
+---
+
+# 🎯 What I Learned from Lesson 3
+
+Through this notebook, I learned how to analyze relationships between multiple variables and choose appropriate visualizations based on the types of features involved.
+
+Some key takeaways include:
+
+* Visualize relationships between numerical variables using scatter plots.
+* Compare numerical variables across categories using bar plots and box plots.
+* Compare distributions across categories using KDE plots.
+* Analyze relationships between categorical variables using crosstabs and heatmaps.
+* Discover hidden clusters using clustermaps.
+* Explore pairwise relationships among multiple numerical features using pair plots.
+* Analyze trends over time using line plots.
+* Summarize multidimensional data using pivot tables and heatmaps.
+
+These techniques provide deeper insights into datasets and help uncover relationships that are not visible through univariate analysis alone.
+
+---
+
+# 🚀 Learning Goal
+
+My aim is to build a strong intuition for data before building Machine Learning models. I believe that successful Machine Learning starts with a deep understanding of the data, and this repository is my effort to document that learning process from the fundamentals to more advanced Exploratory Data Analysis techniques.
+
+As I continue learning, this folder will grow with additional notebooks covering:
+
+* Bivariate Analysis
+* Advanced Multivariate Analysis
+* Feature Engineering
+* Missing Value Treatment
+* Outlier Handling
+* Data Cleaning
+* Statistical Analysis
+* Dimensionality Reduction
+* Real-world EDA Case Studies
+
+Each notebook represents another step in my journey toward becoming a better Data Scientist and Machine Learning Engineer by learning not just **how** to perform EDA, but also **why** each technique is important.
