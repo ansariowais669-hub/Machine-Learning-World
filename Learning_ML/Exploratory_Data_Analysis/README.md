@@ -125,31 +125,7 @@ df.corr()['Target_Column']
 
 ---
 
-# 📸 Notebook Preview
 
-## Understanding the Dataset
-
-![Understanding Data - Part 1](./Screenshot%202026-07-05%20014158.png)
-
----
-
-## Data Types & Missing Values
-
-![Understanding Data - Part 2](./Screenshot%202026-07-05%20014206.png)
-
----
-
-## Descriptive Statistics
-
-![Understanding Data - Part 3](./Screenshot%202026-07-05%20014218.png)
-
----
-
-## Duplicate Values & Correlation
-
-![Understanding Data - Part 4](./Screenshot%202026-07-05%20014227.png)
-
----
 
 # 🎯 What I Learned from Lesson 1
 
@@ -324,37 +300,6 @@ Common statistics include:
 
 ---
 
-# 📸 Notebook Preview
-
-## Categorical Variable Analysis
-
-*(Add screenshots of your notebook here.)*
-
-```markdown
-![Categorical Analysis - Part 1](./your_screenshot_name.png)
-```
-
----
-
-## Numerical Variable Analysis
-
-*(Add screenshots of histograms, box plots, and descriptive statistics here.)*
-
-```markdown
-![Numerical Analysis - Part 2](./your_screenshot_name.png)
-```
-
----
-
-## Distribution & Outlier Analysis
-
-*(Add screenshots showing distribution plots and box plots.)*
-
-```markdown
-![Distribution Analysis - Part 3](./your_screenshot_name.png)
-```
-
----
 
 # 🎯 What I Learned from Lesson 2
 
@@ -639,47 +584,6 @@ This visualization clearly highlights seasonal patterns and yearly trends.
 
 ---
 
-# 📸 Notebook Preview
-
-## Scatter Plot & Bar Plot
-
-*(Add screenshots from your notebook here.)*
-
-```markdown
-![Scatter Plot](./your_screenshot_name.png)
-```
-
----
-
-## Box Plot & Distribution Plot
-
-*(Add screenshots of box plots and KDE plots.)*
-
-```markdown
-![Box Plot](./your_screenshot_name.png)
-```
-
----
-
-## Heatmap & Clustermap
-
-*(Add screenshots of categorical relationship visualizations.)*
-
-```markdown
-![Heatmap](./your_screenshot_name.png)
-```
-
----
-
-## Pair Plot & Line Plot
-
-*(Add screenshots of pair plots and line plots.)*
-
-```markdown
-![Pair Plot](./your_screenshot_name.png)
-```
-
----
 
 # 🎯 What I Learned from Lesson 3
 
