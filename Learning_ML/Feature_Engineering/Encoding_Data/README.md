@@ -1,4 +1,4 @@
-# 🏷️ Encoding Categorical Data
+# 🏷️ Encoding Data
 
 This folder contains my notes and Jupyter notebook on **Encoding Categorical Variables**, an essential step in the Feature Engineering pipeline for Machine Learning.
 
@@ -51,7 +51,7 @@ After completing this notebook, I learned:
 ## 📂 Folder Structure
 
 ```
-Encoding_Categorical_Data/
+Encoding_Data/
 │
 ├── Encoding_Categorical_Data.ipynb
 └── README.md
