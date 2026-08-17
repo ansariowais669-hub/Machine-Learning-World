@@ -27,23 +27,6 @@ Here you'll find:
 
 ---
 
-# 📂 Repository Structure
-
-```text
-Machine-Learning-World/
-│
-├── Customer-Conversion-Hackathon/
-├── Titanic-Survival-Prediction/
-├── House-Price-Prediction/
-├── Spam-Email-Classifier/
-├── Loan-Approval-Prediction/
-├── Notes/
-├── Datasets/
-└── README.md
-```
-
----
-
 # 🛠️ Technologies I'm Learning
 
 * Python
@@ -131,6 +114,8 @@ This repository is not just a collection of code—it's a record of my growth as
 If you're passionate about Machine Learning, Data Science, or AI, feel free to explore my projects, share feedback, or connect with me.
 
 I'm always open to learning, collaborating, and improving.
+
+email - ansariowais669@gmail.com
 
 ---
 
