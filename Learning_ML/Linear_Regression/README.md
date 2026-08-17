@@ -1,8 +1,8 @@
 # Linear Regression
 
-This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, a **from-scratch implementation using Ordinary Least Squares (OLS)**, and **regression model evaluation using different performance metrics**.
+This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, a **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, and **Multiple Linear Regression**.
 
-The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, and interpret regression models using Python**.
+The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, and interpret regression models using Python**.
 
 ---
 
@@ -33,11 +33,10 @@ The notebooks focus on understanding both the **mathematics behind Linear Regres
 * Implemented a **Simple Linear Regression model from scratch** without using Scikit-learn's regression model.
 * Created a custom `LR` class with `fit()` and `predict()` methods.
 * Derived and implemented the **Ordinary Least Squares (OLS)** formulas for calculating:
-
   * **Slope (`m`)**
   * **Intercept (`b`)**
 * Used NumPy arrays for numerical calculations.
-* Trained the custom model on the placement dataset.
+* Trained the model on the placement dataset.
 * Generated predictions using the custom `predict()` method.
 * Understood how the regression model internally calculates its parameters instead of relying on a pre-built library implementation.
 
@@ -52,42 +51,101 @@ The notebooks focus on understanding both the **mathematics behind Linear Regres
 * Split the dataset into training and testing sets using `train_test_split`.
 * Generated predictions using the trained regression model.
 * Evaluated the model using different **Regression Evaluation Metrics**:
-
   * **Mean Absolute Error (MAE)**
   * **Mean Squared Error (MSE)**
   * **Root Mean Squared Error (RMSE)**
   * **R² Score**
   * **Adjusted R² Score**
 * Compared the usefulness of different regression metrics for evaluating model performance.
-* Experimented with adding an additional feature to the dataset.
+* Experimented with adding additional features to the dataset.
 * Observed how adding an **irrelevant feature** can decrease the Adjusted R² score.
 * Observed how adding a **relevant feature** can improve both R² and Adjusted R².
 * Understood why Adjusted R² is useful when working with multiple features.
 
-The notebook obtained the following evaluation results for one of the regression experiments:
+---
 
-| Metric            |  Score |
-| ----------------- | -----: |
-| MAE               | 0.2885 |
-| MSE               | 0.1213 |
-| RMSE              | 0.3483 |
-| R² Score          | 0.7807 |
-| Adjusted R² Score | 0.7750 |
+### 4. `LR_MultipleLinearRegression.ipynb`
 
-## The notebook also experimented with an additional feature and observed an R² score of approximately **0.8164** and an Adjusted R² score of approximately **0.8065**.
+**What I covered:**
 
-## Libraries Used
+* Introduced the concept of **Multiple Linear Regression**, where multiple input features are used to predict a continuous target.
+* Generated a synthetic regression dataset using Scikit-learn's `make_regression`.
+* Created a dataset with:
+  * **100 samples**
+  * **2 features**
+  * **2 informative features**
+  * **1 target**
+  * Added noise to the generated data.
+* Converted the generated NumPy arrays into a **Pandas DataFrame**.
+* Explored the generated dataset containing:
+  * `feature1`
+  * `feature2`
+  * `target`
+* Visualized the relationship between the two features and target using a **3D scatter plot**.
+* Split the dataset into training and testing sets.
+* Implemented Multiple Linear Regression using Scikit-learn's `LinearRegression`.
+* Trained the model using multiple input features.
+* Generated predictions on the test dataset.
+* Evaluated the model using:
+  * **Mean Absolute Error (MAE)**
+  * **Mean Squared Error (MSE)**
+  * **R² Score**
+* Visualized the fitted Multiple Linear Regression model as a **3D regression plane** using Plotly.
+* Understood the geometric representation of Multiple Linear Regression.
 
-* **Pandas** — Data loading, manipulation, and exploration
-* **NumPy** — Numerical operations and array handling
-* **Matplotlib** — Data visualization
-* **Scikit-learn** — Train-test splitting, Linear Regression, and regression evaluation metrics
+The model in the notebook produced the following evaluation results:
+
+| Metric | Score |
+|---|---:|
+| MAE | 41.9547 |
+| MSE | 2266.0802 |
+| R² Score | 0.5146 |
+
+The notebook also creates a 3D visualization containing the original data points and the fitted regression surface. :contentReference[oaicite:2]{index=2}
+
+---
+
+## Simple vs Multiple Linear Regression
+
+### Simple Linear Regression
+
+Uses **one independent feature** to predict the target.
+
+The general equation is:
+
+**`y = mx + b`**
+
+Where:
+
+* `y` = predicted target
+* `x` = input feature
+* `m` = coefficient/slope
+* `b` = intercept
+
+---
+
+### Multiple Linear Regression
+
+Uses **multiple independent features** to predict the target.
+
+The general equation is:
+
+**`y = b₀ + b₁x₁ + b₂x₂ + ... + bₙxₙ`**
+
+Where:
+
+* `y` = predicted target
+* `b₀` = intercept
+* `x₁, x₂, ..., xₙ` = input features
+* `b₁, b₂, ..., bₙ` = coefficients corresponding to each feature
+
+In the newly added notebook, two features (`feature1` and `feature2`) are used to predict the target. :contentReference[oaicite:3]{index=3}
 
 ---
 
 ## Regression Evaluation Metrics
 
-The third notebook introduces several important metrics used to evaluate regression models.
+The regression notebooks introduce several important metrics used to evaluate regression models.
 
 ### Mean Absolute Error (MAE)
 
@@ -123,8 +181,6 @@ R², or the **Coefficient of Determination**, measures how well the model explai
 
 A higher R² generally indicates a better fit.
 
-For example, the notebook obtained an R² score of approximately **0.781** in one experiment.
-
 ---
 
 ### Adjusted R²
@@ -133,12 +189,34 @@ Adjusted R² modifies the R² score by taking the **number of features** and **n
 
 Unlike R², Adjusted R² does not automatically improve when additional features are added.
 
-The notebook demonstrates this experimentally:
+This makes Adjusted R² particularly useful when working with **Multiple Linear Regression** and evaluating whether additional features actually improve the model.
 
-* Adding an **irrelevant feature** decreased the Adjusted R² score.
-* Adding a **relevant feature** increased the Adjusted R² score.
+---
 
-This makes Adjusted R² particularly useful when evaluating models with multiple features.
+## 3D Visualization of Multiple Linear Regression
+
+For Simple Linear Regression, the fitted model can be represented as a **line**.
+
+For Multiple Linear Regression with two features, the model can be visualized as a **plane in 3D space**.
+
+The newly added notebook demonstrates this using **Plotly**, with:
+
+* `feature1` → X-axis
+* `feature2` → Y-axis
+* `target` → Z-axis
+* Regression plane → fitted Multiple Linear Regression model
+
+This provides a visual understanding of how the model fits multiple features simultaneously. :contentReference[oaicite:4]{index=4} :contentReference[oaicite:5]{index=5}
+
+---
+
+## Libraries Used
+
+* **Pandas** — Data loading, manipulation, and exploration
+* **NumPy** — Numerical operations and array handling
+* **Matplotlib** — Data visualization
+* **Plotly** — Interactive 3D visualizations
+* **Scikit-learn** — Train-test splitting, Linear Regression, synthetic dataset generation, and regression evaluation metrics
 
 ---
 
@@ -157,7 +235,11 @@ This makes Adjusted R² particularly useful when evaluating models with multiple
 * How adding features can affect model evaluation.
 * Why adding an irrelevant feature can negatively affect **Adjusted R²**.
 * Why relevant features can improve model performance.
-* How to compare different regression models using appropriate evaluation metrics.
+* The difference between **Simple Linear Regression** and **Multiple Linear Regression**.
+* How Multiple Linear Regression uses multiple independent features to predict a target.
+* How to visualize a Multiple Linear Regression model geometrically as a **3D regression plane**.
+* How to generate synthetic regression datasets using `make_regression`.
+* How to use **Plotly** for interactive 3D regression visualizations.
 
 ---
 
@@ -175,5 +257,27 @@ After completing these notebooks, I can:
 * Evaluate regression models using **MAE, MSE, RMSE, and R²**.
 * Calculate and interpret **Adjusted R²**.
 * Understand the effect of adding relevant and irrelevant features to a regression model.
-* Understand what happens behind the scenes when using a pre-built Linear Regression implementation.
+* Understand the difference between **Simple and Multiple Linear Regression**.
+* Build a **Multiple Linear Regression** model using multiple features.
+* Interpret the coefficients of a Multiple Linear Regression model.
+* Visualize a two-feature regression model using a **3D regression plane**.
+* Use Python libraries such as **NumPy, Pandas, Matplotlib, Plotly, and Scikit-learn** for regression tasks.
 * Develop a stronger understanding of both **model building and model evaluation** in Linear Regression.
+
+---
+
+## Progression
+
+The notebooks in this folder follow a gradual progression:
+
+**Simple Linear Regression**  
+↓  
+**Linear Regression from Scratch using OLS**  
+↓  
+**Regression Evaluation Metrics**  
+↓  
+**Multiple Linear Regression**  
+↓  
+**3D Visualization of Regression Plane**
+
+This progression helps build an understanding of Linear Regression from its **basic implementation and mathematical foundations** to **model evaluation and multi-feature regression**.
