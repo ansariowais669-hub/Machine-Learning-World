@@ -1,8 +1,8 @@
 # Linear Regression
 
-This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, a **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, and **Multiple Linear Regression**.
+This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, and **Multiple Linear Regression from scratch**.
 
-The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, and interpret regression models using Python**.
+The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, and implement regression models using Python**.
 
 ---
 
@@ -33,6 +33,7 @@ The notebooks focus on understanding both the **mathematics behind Linear Regres
 * Implemented a **Simple Linear Regression model from scratch** without using Scikit-learn's regression model.
 * Created a custom `LR` class with `fit()` and `predict()` methods.
 * Derived and implemented the **Ordinary Least Squares (OLS)** formulas for calculating:
+
   * **Slope (`m`)**
   * **Intercept (`b`)**
 * Used NumPy arrays for numerical calculations.
@@ -51,6 +52,7 @@ The notebooks focus on understanding both the **mathematics behind Linear Regres
 * Split the dataset into training and testing sets using `train_test_split`.
 * Generated predictions using the trained regression model.
 * Evaluated the model using different **Regression Evaluation Metrics**:
+
   * **Mean Absolute Error (MAE)**
   * **Mean Squared Error (MSE)**
   * **Root Mean Squared Error (RMSE)**
@@ -71,13 +73,15 @@ The notebooks focus on understanding both the **mathematics behind Linear Regres
 * Introduced the concept of **Multiple Linear Regression**, where multiple input features are used to predict a continuous target.
 * Generated a synthetic regression dataset using Scikit-learn's `make_regression`.
 * Created a dataset with:
+
   * **100 samples**
   * **2 features**
   * **2 informative features**
   * **1 target**
-  * Added noise to the generated data.
+* Added noise to the generated data.
 * Converted the generated NumPy arrays into a **Pandas DataFrame**.
 * Explored the generated dataset containing:
+
   * `feature1`
   * `feature2`
   * `target`
@@ -87,6 +91,7 @@ The notebooks focus on understanding both the **mathematics behind Linear Regres
 * Trained the model using multiple input features.
 * Generated predictions on the test dataset.
 * Evaluated the model using:
+
   * **Mean Absolute Error (MAE)**
   * **Mean Squared Error (MSE)**
   * **R² Score**
@@ -95,13 +100,64 @@ The notebooks focus on understanding both the **mathematics behind Linear Regres
 
 The model in the notebook produced the following evaluation results:
 
-| Metric | Score |
-|---|---:|
-| MAE | 41.9547 |
-| MSE | 2266.0802 |
-| R² Score | 0.5146 |
+| Metric   |     Score |
+| -------- | --------: |
+| MAE      |   41.9547 |
+| MSE      | 2266.0802 |
+| R² Score |    0.5146 |
 
-The notebook also creates a 3D visualization containing the original data points and the fitted regression surface. :contentReference[oaicite:2]{index=2}
+The notebook also creates a 3D visualization containing the original data points and the fitted regression surface.
+
+---
+
+### 5. `LR_MultipleLR_Scratch.ipynb`
+
+**What I covered:**
+
+* Implemented **Multiple Linear Regression from scratch** without directly using Scikit-learn's regression model.
+* Used Scikit-learn's **Diabetes dataset** through `load_diabetes()`.
+* Loaded the feature matrix `X` and target variable `y`.
+* Split the dataset into training and testing sets using `train_test_split`.
+* First implemented Multiple Linear Regression using Scikit-learn's `LinearRegression` as a reference model.
+* Trained the Scikit-learn model and generated predictions on the test dataset.
+* Evaluated the Scikit-learn model using the **R² Score**.
+* Examined the learned:
+
+  * **Coefficients**
+  * **Intercept**
+
+#### Multiple Linear Regression from Scratch
+
+* Created a custom `MLR` class to implement Multiple Linear Regression.
+
+* Defined the model with:
+
+  * `fit()` method for calculating model parameters.
+  * `predict()` method for generating predictions.
+
+* Added a column of ones to the feature matrix to incorporate the **intercept term**.
+
+* Implemented the **Normal Equation** using NumPy:
+
+  **`β = (XᵀX)⁻¹Xᵀy`**
+
+* Used matrix operations such as:
+
+  * `np.insert()`
+  * `np.dot()`
+  * `np.linalg.inv()`
+
+* Extracted the first value of the calculated parameter vector as the **intercept**.
+
+* Stored the remaining values as the **coefficients** of the input features.
+
+* Used the learned coefficients and intercept to generate predictions manually.
+
+* Evaluated the custom Multiple Linear Regression model using the **R² Score**.
+
+* Printed and compared the learned **coefficients** and **intercept** of the custom implementation.
+
+This notebook helped connect the mathematical formulation of Multiple Linear Regression with an actual Python implementation from scratch.
 
 ---
 
@@ -139,7 +195,52 @@ Where:
 * `x₁, x₂, ..., xₙ` = input features
 * `b₁, b₂, ..., bₙ` = coefficients corresponding to each feature
 
-In the newly added notebook, two features (`feature1` and `feature2`) are used to predict the target. :contentReference[oaicite:3]{index=3}
+The `LR_MultipleLinearRegression.ipynb` notebook demonstrates Multiple Linear Regression using two features, while `LR_MultipleLR_Scratch.ipynb` extends the implementation to the **multiple-feature Diabetes dataset**.
+
+---
+
+## Multiple Linear Regression from Scratch
+
+The newly added `LR_MultipleLR_Scratch.ipynb` notebook demonstrates how Multiple Linear Regression can be implemented mathematically without relying on Scikit-learn's `LinearRegression` class.
+
+For a dataset with multiple features, the model can be represented in matrix form as:
+
+**`y = Xβ`**
+
+The parameters can be calculated using the **Normal Equation**:
+
+**`β = (XᵀX)⁻¹Xᵀy`**
+
+Where:
+
+* `X` = feature matrix
+* `Xᵀ` = transpose of the feature matrix
+* `β` = vector containing the model coefficients and intercept
+* `y` = target vector
+
+To include the intercept, a column of ones is added to the feature matrix.
+
+The custom implementation follows this process:
+
+```text
+Feature Matrix
+      ↓
+Add column of 1s
+      ↓
+Calculate XᵀX
+      ↓
+Calculate (XᵀX)⁻¹
+      ↓
+Calculate Xᵀy
+      ↓
+β = (XᵀX)⁻¹Xᵀy
+      ↓
+Extract intercept and coefficients
+      ↓
+Generate predictions
+```
+
+This provides a direct connection between the **mathematical Normal Equation** and the actual implementation of Multiple Linear Regression.
 
 ---
 
@@ -199,24 +300,24 @@ For Simple Linear Regression, the fitted model can be represented as a **line**.
 
 For Multiple Linear Regression with two features, the model can be visualized as a **plane in 3D space**.
 
-The newly added notebook demonstrates this using **Plotly**, with:
+The `LR_MultipleLinearRegression.ipynb` notebook demonstrates this using **Plotly**, with:
 
 * `feature1` → X-axis
 * `feature2` → Y-axis
 * `target` → Z-axis
 * Regression plane → fitted Multiple Linear Regression model
 
-This provides a visual understanding of how the model fits multiple features simultaneously. :contentReference[oaicite:4]{index=4} :contentReference[oaicite:5]{index=5}
+This provides a visual understanding of how the model fits multiple features simultaneously.
 
 ---
 
 ## Libraries Used
 
 * **Pandas** — Data loading, manipulation, and exploration
-* **NumPy** — Numerical operations and array handling
+* **NumPy** — Numerical operations, array handling, and matrix calculations
 * **Matplotlib** — Data visualization
 * **Plotly** — Interactive 3D visualizations
-* **Scikit-learn** — Train-test splitting, Linear Regression, synthetic dataset generation, and regression evaluation metrics
+* **Scikit-learn** — Dataset loading, train-test splitting, Linear Regression, synthetic dataset generation, and regression evaluation metrics
 
 ---
 
@@ -237,8 +338,15 @@ This provides a visual understanding of how the model fits multiple features sim
 * Why relevant features can improve model performance.
 * The difference between **Simple Linear Regression** and **Multiple Linear Regression**.
 * How Multiple Linear Regression uses multiple independent features to predict a target.
-* How to visualize a Multiple Linear Regression model geometrically as a **3D regression plane**.
+* How to implement **Multiple Linear Regression from scratch**.
+* How the **Normal Equation** is used to calculate the parameters of Multiple Linear Regression.
+* How to represent Linear Regression mathematically using **matrices and vectors**.
+* How to add an intercept term to a feature matrix.
+* How to calculate regression coefficients using NumPy matrix operations.
+* How to compare a **custom implementation** with Scikit-learn's implementation.
+* How to visualize a two-feature Multiple Linear Regression model as a **3D regression plane**.
 * How to generate synthetic regression datasets using `make_regression`.
+* How to use the Scikit-learn **Diabetes dataset** for a regression problem.
 * How to use **Plotly** for interactive 3D regression visualizations.
 
 ---
@@ -260,9 +368,12 @@ After completing these notebooks, I can:
 * Understand the difference between **Simple and Multiple Linear Regression**.
 * Build a **Multiple Linear Regression** model using multiple features.
 * Interpret the coefficients of a Multiple Linear Regression model.
+* Understand the **Normal Equation** used in Multiple Linear Regression.
+* Implement Multiple Linear Regression **from scratch using NumPy**.
+* Compare a custom implementation with Scikit-learn's `LinearRegression`.
 * Visualize a two-feature regression model using a **3D regression plane**.
 * Use Python libraries such as **NumPy, Pandas, Matplotlib, Plotly, and Scikit-learn** for regression tasks.
-* Develop a stronger understanding of both **model building and model evaluation** in Linear Regression.
+* Develop a stronger understanding of both **model building, mathematical implementation, and model evaluation** in Linear Regression.
 
 ---
 
@@ -270,14 +381,26 @@ After completing these notebooks, I can:
 
 The notebooks in this folder follow a gradual progression:
 
-**Simple Linear Regression**  
-↓  
-**Linear Regression from Scratch using OLS**  
-↓  
-**Regression Evaluation Metrics**  
-↓  
-**Multiple Linear Regression**  
-↓  
+**Simple Linear Regression**
+
+↓
+
+**Linear Regression from Scratch using OLS**
+
+↓
+
+**Regression Evaluation Metrics**
+
+↓
+
+**Multiple Linear Regression using Scikit-learn**
+
+↓
+
+**Multiple Linear Regression from Scratch**
+
+↓
+
 **3D Visualization of Regression Plane**
 
-This progression helps build an understanding of Linear Regression from its **basic implementation and mathematical foundations** to **model evaluation and multi-feature regression**.
+This progression helps build an understanding of Linear Regression from its **basic implementation and mathematical foundations** to **model evaluation, multi-feature regression, matrix-based implementation, and visualization**.
