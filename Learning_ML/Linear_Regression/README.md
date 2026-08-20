@@ -1,8 +1,8 @@
 # Linear Regression
 
-This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, and **Multiple Linear Regression from scratch**.
+This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, **Multiple Linear Regression from scratch**, and **Assumptions of Linear Regression**.
 
-The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, and implement regression models using Python**.
+The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, implement, and validate regression models using Python**.
 
 ---
 
@@ -161,6 +161,42 @@ This notebook helped connect the mathematical formulation of Multiple Linear Reg
 
 ---
 
+### 6. `LR_Assumptions_of_LR.ipynb`
+
+**What I covered:**
+
+This notebook focuses on understanding the important **assumptions of Linear Regression** that should be considered when building and interpreting regression models.
+
+#### 1. Linear Relationship
+
+* Studied the assumption that there should be a **linear relationship** between the independent variables and the dependent variable.
+* Understood why Linear Regression works best when the relationship between predictors and the target can be reasonably represented using a linear function.
+
+#### 2. Multicollinearity
+
+* Studied **Multicollinearity**, where independent features are strongly related to each other.
+* Used the **Variance Inflation Factor (VIF)** concept to identify multicollinearity.
+* Observed that higher VIF values indicate stronger multicollinearity.
+* In the notebook, values **greater than 5** are considered an indication of Multicollinearity.
+
+#### 3. Normality of Residuals
+
+* Studied the **Normality of Residuals** assumption.
+* Understood the importance of examining the distribution of residuals when validating a Linear Regression model.
+
+#### 4. Homoscedasticity
+
+* Studied **Homoscedasticity**, which refers to the residuals having a relatively uniform spread.
+* Observed the idea that the spread should remain approximately consistent across the range of predicted/independent values.
+
+#### 5. No Autocorrelation of Residuals
+
+* Studied the assumption of **No Autocorrelation of Residuals**.
+* Understood that residuals should not exhibit a systematic relationship with one another.
+* This assumption is particularly important when observations have an ordered or time-dependent structure.
+
+---
+
 ## Simple vs Multiple Linear Regression
 
 ### Simple Linear Regression
@@ -201,7 +237,7 @@ The `LR_MultipleLinearRegression.ipynb` notebook demonstrates Multiple Linear Re
 
 ## Multiple Linear Regression from Scratch
 
-The newly added `LR_MultipleLR_Scratch.ipynb` notebook demonstrates how Multiple Linear Regression can be implemented mathematically without relying on Scikit-learn's `LinearRegression` class.
+The `LR_MultipleLR_Scratch.ipynb` notebook demonstrates how Multiple Linear Regression can be implemented mathematically without relying on Scikit-learn's `LinearRegression` class.
 
 For a dataset with multiple features, the model can be represented in matrix form as:
 
@@ -241,6 +277,52 @@ Generate predictions
 ```
 
 This provides a direct connection between the **mathematical Normal Equation** and the actual implementation of Multiple Linear Regression.
+
+---
+
+## Assumptions of Linear Regression
+
+For Linear Regression models to provide reliable and meaningful results, several important assumptions should be considered.
+
+### 1. Linear Relationship
+
+There should be a reasonably **linear relationship between the independent variables and the dependent variable**.
+
+---
+
+### 2. No Multicollinearity
+
+The independent variables should not be highly correlated with each other.
+
+High multicollinearity can make coefficient estimates unstable and difficult to interpret.
+
+The notebook uses the **VIF (Variance Inflation Factor)** concept, where higher values indicate a greater degree of multicollinearity.
+
+---
+
+### 3. Normality of Residuals
+
+The residuals should approximately follow a **normal distribution**.
+
+Residuals are the differences between the actual and predicted values:
+
+**`Residual = Actual − Predicted`**
+
+---
+
+### 4. Homoscedasticity
+
+The residuals should have a relatively **constant spread** across the range of predicted values or independent variables.
+
+A changing or funnel-shaped residual spread indicates **heteroscedasticity**.
+
+---
+
+### 5. No Autocorrelation of Residuals
+
+Residuals should be **independent of one another** and should not exhibit systematic patterns or correlations.
+
+This assumption becomes especially important for datasets where observations have a natural order, such as time-series data.
 
 ---
 
@@ -318,6 +400,7 @@ This provides a visual understanding of how the model fits multiple features sim
 * **Matplotlib** — Data visualization
 * **Plotly** — Interactive 3D visualizations
 * **Scikit-learn** — Dataset loading, train-test splitting, Linear Regression, synthetic dataset generation, and regression evaluation metrics
+* **Statsmodels** — Statistical analysis and tools for investigating Linear Regression assumptions
 
 ---
 
@@ -347,6 +430,14 @@ This provides a visual understanding of how the model fits multiple features sim
 * How to visualize a two-feature Multiple Linear Regression model as a **3D regression plane**.
 * How to generate synthetic regression datasets using `make_regression`.
 * How to use the Scikit-learn **Diabetes dataset** for a regression problem.
+* Why understanding the **assumptions of Linear Regression** is important before interpreting a model.
+* What **Linear Relationship** means in the context of Linear Regression.
+* What **Multicollinearity** is and why it can affect regression models.
+* How **VIF** can be used to investigate Multicollinearity.
+* Why **Normality of Residuals** is an important assumption.
+* What **Homoscedasticity** means and why constant residual variance matters.
+* Why **No Autocorrelation of Residuals** is important for independent observations.
+* How model evaluation involves not only measuring performance but also checking whether the assumptions behind the model are reasonably satisfied.
 * How to use **Plotly** for interactive 3D regression visualizations.
 
 ---
@@ -372,8 +463,14 @@ After completing these notebooks, I can:
 * Implement Multiple Linear Regression **from scratch using NumPy**.
 * Compare a custom implementation with Scikit-learn's `LinearRegression`.
 * Visualize a two-feature regression model using a **3D regression plane**.
+* Understand the major **assumptions of Linear Regression**.
+* Identify and understand **Multicollinearity**.
+* Use **VIF** as a measure for investigating multicollinearity.
+* Understand the importance of **Normality of Residuals**.
+* Understand and identify **Homoscedasticity**.
+* Understand the importance of **No Autocorrelation of Residuals**.
 * Use Python libraries such as **NumPy, Pandas, Matplotlib, Plotly, and Scikit-learn** for regression tasks.
-* Develop a stronger understanding of both **model building, mathematical implementation, and model evaluation** in Linear Regression.
+* Develop a stronger understanding of **model building, mathematical implementation, model evaluation, and model validation** in Linear Regression.
 
 ---
 
@@ -401,6 +498,10 @@ The notebooks in this folder follow a gradual progression:
 
 ↓
 
+**Assumptions of Linear Regression**
+
+↓
+
 **3D Visualization of Regression Plane**
 
-This progression helps build an understanding of Linear Regression from its **basic implementation and mathematical foundations** to **model evaluation, multi-feature regression, matrix-based implementation, and visualization**.
+This progression helps build an understanding of Linear Regression from its **basic implementation and mathematical foundations** to **model evaluation, multi-feature regression, matrix-based implementation, model assumptions, and visualization**.
