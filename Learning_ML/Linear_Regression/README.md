@@ -1,8 +1,8 @@
 # Linear Regression
 
-This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, **Multiple Linear Regression from scratch (Normal Equation)**, **Assumptions of Linear Regression**, **Batch Gradient Descent from scratch**, and **Stochastic Gradient Descent (SGD) from scratch & Scikit-learn**[cite: 1].
+This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, **Multiple Linear Regression from scratch (Normal Equation)**, **Assumptions of Linear Regression**, **Batch Gradient Descent from scratch**, **Stochastic Gradient Descent (SGD) from scratch & Scikit-learn**, and **Mini-Batch Gradient Descent (MBGD) from scratch & Scikit-learn**.
 
-The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, implement, and validate regression models using Python**[cite: 1].
+The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, implement, and validate regression models using Python**.
 
 ---
 
@@ -105,8 +105,8 @@ The notebook also creates a 3D visualization containing the original data points
 
 **What I covered:**
 * Implemented **Multiple Linear Regression from scratch** without directly using Scikit-learn's regression model.
-* Used Scikit-learn's **Diabetes dataset** through `load_diabetes()`[cite: 1].
-* Loaded the feature matrix `X` and target variable `y`[cite: 1].
+* Used Scikit-learn's **Diabetes dataset** through `load_diabetes()`.
+* Loaded the feature matrix `X` and target variable `y`.
 * Split the dataset into training and testing sets using `train_test_split`.
 * First implemented Multiple Linear Regression using Scikit-learn's `LinearRegression` as a reference model.
 * Trained the Scikit-learn model and generated predictions on the test dataset.
@@ -186,34 +186,66 @@ This notebook focuses on understanding and implementing **Linear Regression usin
 ### 8. `LR_SGDRegressor_from_Scratch.ipynb`
 
 **What I covered:**
-This notebook covers the step-by-step implementation of **Stochastic Gradient Descent (SGD) for Multiple Linear Regression from scratch** and compares it directly with Scikit-learn's built-in `SGDRegressor`[cite: 1].
+This notebook covers the step-by-step implementation of **Stochastic Gradient Descent (SGD) for Multiple Linear Regression from scratch** and compares it directly with Scikit-learn's built-in `SGDRegressor`.
 
 #### Dataset & Reference Linear Regression
-* Loaded the **Diabetes Dataset** (`442` samples, `10` features) using Scikit-learn[cite: 1].
-* Applied a `80-20` train-test split with `random_state=2`[cite: 1].
-* Trained a reference Scikit-learn `LinearRegression` model to extract reference coefficients and intercept[cite: 1].
+* Loaded the **Diabetes Dataset** (`442` samples, `10` features) using Scikit-learn.
+* Applied a `80-20` train-test split with `random_state=2`.
+* Trained a reference Scikit-learn `LinearRegression` model to extract reference coefficients and intercept.
 
 #### Custom `SGDRegressor` Implementation (From Scratch)
-* Created a custom class `SGDRegressor` with configurable `learning_rate` and `epochs`[cite: 1].
-* Initialized the intercept (`0`) and coefficients (`np.ones(n_features)`)[cite: 1].
-* Implemented stochastic updates: for each epoch, iterating over dataset samples selecting random indices (`np.random.randint`)[cite: 1]:
+* Created a custom class `SGDRegressor` with configurable `learning_rate` and `epochs`.
+* Initialized the intercept (`0`) and coefficients (`np.ones(n_features)`).
+* Implemented stochastic updates: for each epoch, iterating over dataset samples selecting random indices (`np.random.randint`):
   * Calculated predicted single-point target `y_hat` using vector dot product:
     
-    **`y_hat = Xᵢ · W + b`**[cite: 1]
+    **`y_hat = Xᵢ · W + b`**
     
   * Derived gradients per instance for intercept and coefficients:
     
-    **`∂L/∂b = -2 × (yᵢ - y_hat)`**[cite: 1]
+    **`∂L/∂b = -2 × (yᵢ - y_hat)`**
     
-    **`∂L/∂W = -2 × (yᵢ - y_hat) × Xᵢ`**[cite: 1]
+    **`∂L/∂W = -2 × (yᵢ - y_hat) × Xᵢ`**
     
-  * Updated parameters in real-time per sample[cite: 1].
-* Calculated total training runtime using Python's `time` module[cite: 1].
-* Achieved an R² Score of **~0.418** on the test split[cite: 1].
+  * Updated parameters in real-time per sample.
+* Calculated total training runtime using Python's `time` module.
+* Achieved an R² Score of **~0.418** on the test split.
 
 #### Scikit-learn `SGDRegressor` Comparison
-* Used `sklearn.linear_model.SGDRegressor` configured with constant learning rate (`learning_rate='constant'`, `eta0=0.01`, `max_iter=100`)[cite: 1].
-* Evaluated predictions against the custom class, obtaining a comparable R² Score of **~0.432**[cite: 1].
+* Used `sklearn.linear_model.SGDRegressor` configured with constant learning rate (`learning_rate='constant'`, `eta0=0.01`, `max_iter=100`).
+* Evaluated predictions against the custom class, obtaining a comparable R² Score of **~0.432**.
+
+---
+
+### 9. `LR_Mini_Batch_GD_Scratch.ipynb`
+
+**What I covered:**
+This notebook focuses on the concept and vectorized implementation of **Mini-Batch Gradient Descent (MBGD)** for Multiple Linear Regression from scratch and compares it against standard OLS and Scikit-learn's `SGDRegressor`.
+
+#### Dataset & Baseline Standard OLS
+* Utilized Scikit-learn's **Diabetes Dataset** (`442` rows, `10` features) with an 80-20 train-test split (`random_state=2`).
+* Baseline `LinearRegression` model achieved an R² Score of **0.4399** on the test set.
+
+#### Custom `MBGDRegressor` Implementation (From Scratch)
+* Created a custom class `MBGDRegressor` configurable with `batch_size`, `learning_rate`, and `epochs`.
+* Initialized intercept to `0` and feature weights to vector of `1`s.
+* Implemented mini-batch update loops:
+  * Sampled random subset indices of size `batch_size` using Python's `random.sample()`.
+  * Computed vectorized predictions: **`y_hat = X_batch · W + b`**.
+  * Derived mini-batch gradients:
+    
+    **`∂L/∂b = -2 × mean(y_batch - y_hat)`**
+    
+    **`∂L/∂W = -2 × (y_batch - y_hat)ᵀ · X_batch`**
+    
+  * Scaled step updates using `self.lr`.
+* Trained using `batch_size ≈ 7` (`X_train.shape[0] / 50`), `learning_rate = 0.01`, and `epochs = 75`.
+* Achieved an R² Score of **0.4472** on the test split.
+
+#### Scikit-learn `SGDRegressor` via `partial_fit`
+* Configured Scikit-learn's `SGDRegressor(learning_rate='constant', eta0=0.2)`.
+* Applied an explicit mini-batch loop processing batches of `35` samples using `partial_fit()` over 100 iterations.
+* Achieved an R² Score of **0.4315**.
 
 ---
 
@@ -227,11 +259,11 @@ Uses **one independent feature** to predict the target.
 ---
 
 ### Multiple Linear Regression
-Uses **multiple independent features** to predict the target[cite: 1].
+Uses **multiple independent features** to predict the target.
 
 **`y = b₀ + b₁x₁ + b₂x₂ + ... + bₙxₙ`**
 
-The `LR_MultipleLinearRegression.ipynb` notebook demonstrates Multiple Linear Regression using two features, while `LR_MultipleLR_Scratch.ipynb` and `LR_SGDRegressor_from_Scratch.ipynb` extend the implementation to the **10-feature Diabetes dataset**[cite: 1].
+The `LR_MultipleLinearRegression.ipynb` notebook demonstrates Multiple Linear Regression using two features, while `LR_MultipleLR_Scratch.ipynb`, `LR_SGDRegressor_from_Scratch.ipynb`, and `LR_Mini_Batch_GD_Scratch.ipynb` extend the implementation to the **10-feature Diabetes dataset**.
 
 ---
 
@@ -245,9 +277,10 @@ This folder highlights three fundamental methods to compute or approximate regre
 
   **`β = (XᵀX)⁻¹Xᵀy`**
 
-### 2. Iterative Optimization Approach
+### 2. Iterative Optimization Approaches
 * **Batch Gradient Descent:** Used in `LR_GradientDescent_from_Scratch.ipynb`, updating weights using gradients calculated over the *entire dataset* in each iteration.
-* **Stochastic Gradient Descent (SGD):** Used in `LR_SGDRegressor_from_Scratch.ipynb`, updating weights *sample-by-sample* (`1` observation at a time), making it computationally efficient for massive datasets[cite: 1].
+* **Stochastic Gradient Descent (SGD):** Used in `LR_SGDRegressor_from_Scratch.ipynb`, updating weights *sample-by-sample* (`1` observation at a time), making it computationally efficient for massive datasets.
+* **Mini-Batch Gradient Descent (MBGD):** Used in `LR_Mini_Batch_GD_Scratch.ipynb`, updating weights over small random subsets (`batch_size`), balancing vector computational speed and update stability.
 
 ---
 
@@ -266,7 +299,7 @@ This folder highlights three fundamental methods to compute or approximate regre
 * **Mean Absolute Error (MAE):** Average magnitude of absolute errors.
 * **Mean Squared Error (MSE):** Average of squared errors (penalizes large outliers).
 * **Root Mean Squared Error (RMSE):** Square root of MSE, returned in target units.
-* **R² Score:** Variance explained ratio relative to a baseline mean model[cite: 1].
+* **R² Score:** Variance explained ratio relative to a baseline mean model.
 * **Adjusted R² Score:** Penalizes addition of non-informative noise features.
 
 ---
@@ -274,22 +307,22 @@ This folder highlights three fundamental methods to compute or approximate regre
 ## Libraries Used
 
 * **Pandas** — Data loading, manipulation, and exploration
-* **NumPy** — Numerical operations, array manipulation, dot products, and matrix operations[cite: 1]
+* **NumPy** — Numerical operations, array manipulation, dot products, matrix operations, and mini-batch indexing
 * **Matplotlib** — 2D visualizations and regression line plotting
 * **Plotly** — Interactive 3D surface and regression plane visualizations
-* **Scikit-learn** — Machine learning algorithms (`LinearRegression`, `SGDRegressor`), metrics (`r2_score`), datasets (`load_diabetes`, `make_regression`), and splitting (`train_test_split`)[cite: 1]
+* **Scikit-learn** — Machine learning algorithms (`LinearRegression`, `SGDRegressor`), metrics (`r2_score`), datasets (`load_diabetes`, `make_regression`), and splitting (`train_test_split`)
 * **Statsmodels** — Statistical diagnostics and VIF computation
-* **Time** — Computational runtime benchmarking[cite: 1]
+* **Time & Random** — Computational runtime benchmarking and mini-batch sample selection
 
 ---
 
 ## What I Learned
 
-* Difference between analytical exact solvers (**OLS, Normal Equation**) and iterative numerical approximations (**Batch GD, SGD**)[cite: 1].
-* How to manually code stochastic parameter updates per sample instance using vector operations (`np.dot`)[cite: 1].
-* Practical trade-offs of learning rates (`eta0`), epochs (`max_iter`), and convergence warnings in iterative algorithms[cite: 1].
-* Implementing multi-variable custom estimators in Python with standardized `.fit()` and `.predict()` methods[cite: 1].
-* Benchmarking custom linear algebra code against battle-tested Scikit-learn standard classes (`LinearRegression`, `SGDRegressor`)[cite: 1].
+* Difference between analytical exact solvers (**OLS, Normal Equation**) and iterative numerical approximations (**Batch GD, SGD, Mini-Batch GD**).
+* How to manually code stochastic and mini-batch parameter updates per instance using vectorized NumPy operations (`np.dot`).
+* Trade-offs of mini-batch sizes: mini-batch optimization provides reduced noise over SGD and lower computational cost per epoch compared to full Batch GD.
+* Leveraging Scikit-learn's `.partial_fit()` method on `SGDRegressor` to handle custom batch sizes for online and mini-batch streaming training workflows.
+* Benchmarking custom linear algebra code against battle-tested Scikit-learn standard estimators (`LinearRegression`, `SGDRegressor`).
 
 ---
 
@@ -309,6 +342,8 @@ This folder highlights three fundamental methods to compute or approximate regre
 ↓  
 **Batch Gradient Descent from Scratch**  
 ↓  
-**Stochastic Gradient Descent (SGD) from Scratch & Scikit-learn**[cite: 1]  
+**Stochastic Gradient Descent (SGD) from Scratch & Scikit-learn**  
+↓  
+**Mini-Batch Gradient Descent (MBGD) from Scratch & Scikit-learn**  
 ↓  
 **3D Visualization of Regression Planes**
