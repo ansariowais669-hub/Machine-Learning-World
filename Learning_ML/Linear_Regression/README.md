@@ -1,8 +1,8 @@
-# Linear Regression
+# Linear & Polynomial Regression
 
-This folder contains my practice and implementation of **Linear Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, **Multiple Linear Regression from scratch (Normal Equation)**, **Assumptions of Linear Regression**, **Batch Gradient Descent from scratch**, **Stochastic Gradient Descent (SGD) from scratch & Scikit-learn**, and **Mini-Batch Gradient Descent (MBGD) from scratch & Scikit-learn**.
+This repository contains my practice and implementation of **Linear Regression** and **Polynomial Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, **Multiple Linear Regression from scratch (Normal Equation)**, **Assumptions of Linear Regression**, **Batch Gradient Descent from scratch**, **Stochastic Gradient Descent (SGD) from scratch & Scikit-learn**, **Mini-Batch Gradient Descent (MBGD) from scratch & Scikit-learn**, and **Polynomial Regression with Scikit-learn**.
 
-The notebooks focus on understanding both the **mathematics behind Linear Regression** and how to **build, evaluate, visualize, implement, and validate regression models using Python**.
+The notebooks focus on understanding both the **mathematics behind regression models** and how to **build, evaluate, visualize, implement, and validate regression models using Python**.
 
 ---
 
@@ -190,7 +190,7 @@ This notebook covers the step-by-step implementation of **Stochastic Gradient De
 
 #### Dataset & Reference Linear Regression
 * Loaded the **Diabetes Dataset** (`442` samples, `10` features) using Scikit-learn.
-* Applied a `80-20` train-test split with `random_state=2`.
+* Applied an `80-20` train-test split with `random_state=2`.
 * Trained a reference Scikit-learn `LinearRegression` model to extract reference coefficients and intercept.
 
 #### Custom `SGDRegressor` Implementation (From Scratch)
@@ -249,10 +249,34 @@ This notebook focuses on the concept and vectorized implementation of **Mini-Bat
 
 ---
 
-## Simple vs Multiple Linear Regression
+### 10. `Polynomial_Regression.ipynb`
+
+**What I covered:**
+This notebook introduces **Polynomial Regression** to model non-linear relationships between independent features and continuous target variables.
+
+#### Non-Linear Dataset Generation
+* Synthetic non-linear dataset generated using a quadratic equation with random Gaussian noise:
+  
+  **`y = 0.8x² + 0.9x + 2 + noise`**
+
+* Sample size: `200` points generated in the range `[-3, 3]`.
+* Visualized non-linear distribution using Matplotlib 2D scatter plots.
+
+#### Linear Regression Baseline
+* Applied standard Scikit-learn `LinearRegression` directly to non-linear data.
+* Train-test split: `80-20` with `random_state=2`.
+* Evaluated baseline performance using **R² Score**, yielding a low score of **~0.2691** due to underfitting.
+
+#### Key Takeaways
+* Demonstrated why standard Linear Regression fails when underlying data exhibits non-linear quadratic trends.
+* Prepared workflow for transforming feature spaces using `PolynomialFeatures` and building Machine Learning `Pipeline` pipelines.
+
+---
+
+## Simple vs Multiple vs Polynomial Linear Regression
 
 ### Simple Linear Regression
-Uses **one independent feature** to predict the target.
+Uses **one independent linear feature** to predict the target.
 
 **`y = mx + b`**
 
@@ -264,6 +288,15 @@ Uses **multiple independent features** to predict the target.
 **`y = b₀ + b₁x₁ + b₂x₂ + ... + bₙxₙ`**
 
 The `LR_MultipleLinearRegression.ipynb` notebook demonstrates Multiple Linear Regression using two features, while `LR_MultipleLR_Scratch.ipynb`, `LR_SGDRegressor_from_Scratch.ipynb`, and `LR_Mini_Batch_GD_Scratch.ipynb` extend the implementation to the **10-feature Diabetes dataset**.
+
+---
+
+### Polynomial Regression
+Extends linear regression by modeling relationships as an **n-th degree polynomial** to capture non-linear patterns.
+
+**`y = b₀ + b₁x + b₂x² + ... + bₙxⁿ`**
+
+Demonstrated in `Polynomial_Regression.ipynb` using a non-linear quadratic dataset.
 
 ---
 
@@ -310,7 +343,7 @@ This folder highlights three fundamental methods to compute or approximate regre
 * **NumPy** — Numerical operations, array manipulation, dot products, matrix operations, and mini-batch indexing
 * **Matplotlib** — 2D visualizations and regression line plotting
 * **Plotly** — Interactive 3D surface and regression plane visualizations
-* **Scikit-learn** — Machine learning algorithms (`LinearRegression`, `SGDRegressor`), metrics (`r2_score`), datasets (`load_diabetes`, `make_regression`), and splitting (`train_test_split`)
+* **Scikit-learn** — Machine learning algorithms (`LinearRegression`, `SGDRegressor`), metrics (`r2_score`), preprocessing (`PolynomialFeatures`, `StandardScaler`), pipelines (`Pipeline`), datasets (`load_diabetes`, `make_regression`), and splitting (`train_test_split`)
 * **Statsmodels** — Statistical diagnostics and VIF computation
 * **Time & Random** — Computational runtime benchmarking and mini-batch sample selection
 
@@ -322,6 +355,7 @@ This folder highlights three fundamental methods to compute or approximate regre
 * How to manually code stochastic and mini-batch parameter updates per instance using vectorized NumPy operations (`np.dot`).
 * Trade-offs of mini-batch sizes: mini-batch optimization provides reduced noise over SGD and lower computational cost per epoch compared to full Batch GD.
 * Leveraging Scikit-learn's `.partial_fit()` method on `SGDRegressor` to handle custom batch sizes for online and mini-batch streaming training workflows.
+* Modeling non-linear dataset patterns using non-linear synthetic equations and analyzing why linear regression models underfit quadratic boundaries.
 * Benchmarking custom linear algebra code against battle-tested Scikit-learn standard estimators (`LinearRegression`, `SGDRegressor`).
 
 ---
@@ -346,4 +380,6 @@ This folder highlights three fundamental methods to compute or approximate regre
 ↓  
 **Mini-Batch Gradient Descent (MBGD) from Scratch & Scikit-learn**  
 ↓  
-**3D Visualization of Regression Planes**
+**3D Visualization of Regression Planes**  
+↓  
+**Polynomial Regression (Handling Non-Linear Datasets)**
