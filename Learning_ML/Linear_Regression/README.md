@@ -1,385 +1,200 @@
-# Linear & Polynomial Regression
+# Linear, Polynomial & Regularized Regression
 
-This repository contains my practice and implementation of **Linear Regression** and **Polynomial Regression**, covering **Simple Linear Regression using Scikit-learn**, **from-scratch implementation using Ordinary Least Squares (OLS)**, **Regression Evaluation Metrics**, **Multiple Linear Regression using Scikit-learn**, **Multiple Linear Regression from scratch (Normal Equation)**, **Assumptions of Linear Regression**, **Batch Gradient Descent from scratch**, **Stochastic Gradient Descent (SGD) from scratch & Scikit-learn**, **Mini-Batch Gradient Descent (MBGD) from scratch & Scikit-learn**, and **Polynomial Regression with Scikit-learn**.
+This repository contains my practice and hands-on implementations of continuous variable regression models using Python. It covers **Simple Linear Regression (Scikit-learn and from-scratch OLS)**, **Multiple Linear Regression (Scikit-learn and from-scratch Normal Equation)**, **Regression Evaluation Metrics**, **Assumptions of Linear Regression**, **Iterative Optimization (Batch, Stochastic, and Mini-Batch Gradient Descent)**, **Polynomial Regression**, and **Ridge Regression (L2 Regularization)**.
 
-The notebooks focus on understanding both the **mathematics behind regression models** and how to **build, evaluate, visualize, implement, and validate regression models using Python**.
+The primary goal of this repository is to bridge theoretical mathematical concepts with practical Python implementations, model training, performance evaluation, diagnostics, and 3D visualization.
 
 ---
 
 ## Notebooks
 
 ### 1. `LR_Simple_LinearRegression.ipynb`
-
-**What I covered:**
-* Loaded and explored a placement dataset using **Pandas**.
-* Used **CGPA** as the feature and **Package** as the target.
-* Visualized the relationship between CGPA and Package.
-* Split the dataset into training and testing sets using `train_test_split`.
-* Implemented Simple Linear Regression using Scikit-learn's `LinearRegression`.
-* Trained the model and generated predictions.
-* Visualized the **regression line** and data points.
-* Understood the **coefficient (slope)** and **intercept** of the model.
-* Connected the implementation with the equation:
-
-  **`y = mx + b`**
+* **Dataset:** Placement dataset (CGPA vs. Package).
+* **Concepts:** Exploratory Data Analysis with Pandas, data splitting via `train_test_split`.
+* **Implementation:** Built a Simple Linear Regression model using Scikit-learn's `LinearRegression`.
+* **Visualization:** Plotted the fitted 2D regression line alongside actual data points.
+* **Math Link:** Analyzed model attributes (slope $m$ and intercept $b$) matching the equation:
+  
+  $$y = mx + b$$
 
 ---
 
 ### 2. `LR_SimpleLinearRegression_OLS_scratch.ipynb`
+* **Concepts:** Custom implementation of Simple Linear Regression from scratch without using machine learning libraries.
+* **Implementation:** Created a custom `LR` class with object-oriented `fit()` and `predict()` methods.
+* **Math Derived:** Implemented closed-form **Ordinary Least Squares (OLS)** formulas for slope ($m$) and intercept ($b$) using NumPy:
 
-**What I covered:**
-* Implemented a **Simple Linear Regression model from scratch** without using Scikit-learn's regression model.
-* Created a custom `LR` class with `fit()` and `predict()` methods.
-* Derived and implemented the **Ordinary Least Squares (OLS)** formulas for calculating:
-  * **Slope (`m`)**
-  * **Intercept (`b`)**
-* Used NumPy arrays for numerical calculations.
-* Trained the model on the placement dataset.
-* Generated predictions using the custom `predict()` method.
-* Understood how the regression model internally calculates its parameters instead of relying on a pre-built library implementation.
+  $$m = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}, \quad b = \bar{y} - m\bar{x}$$
 
 ---
 
 ### 3. `LR_Regression_Metrics.ipynb`
+* **Dataset:** Placement dataset.
+* **Metrics Covered:** Evaluated models using Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), $R^2$ Score, and Adjusted $R^2$ Score.
+* **Feature Analysis:** Added relevant vs. irrelevant features to demonstrate why Adjusted $R^2$ penalizes non-informative features, preventing artificial score inflation:
 
-**What I covered:**
-* Loaded and explored the placement dataset containing **CGPA** and **Package**.
-* Built a Linear Regression model using Scikit-learn.
-* Split the dataset into training and testing sets using `train_test_split`.
-* Generated predictions using the trained regression model.
-* Evaluated the model using different **Regression Evaluation Metrics**:
-  * **Mean Absolute Error (MAE)**
-  * **Mean Squared Error (MSE)**
-  * **Root Mean Squared Error (RMSE)**
-  * **R² Score**
-  * **Adjusted R² Score**
-* Compared the usefulness of different regression metrics for evaluating model performance.
-* Experimented with adding additional features to the dataset.
-* Observed how adding an **irrelevant feature** can decrease the Adjusted R² score.
-* Observed how adding a **relevant feature** can improve both R² and Adjusted R².
-* Understood why Adjusted R² is useful when working with multiple features.
+  $$\text{Adjusted } R^2 = 1 - \left[ \frac{(1 - R^2)(n - 1)}{n - k - 1} \right]$$
 
 ---
 
 ### 4. `LR_MultipleLinearRegression.ipynb`
-
-**What I covered:**
-* Introduced the concept of **Multiple Linear Regression**, where multiple input features are used to predict a continuous target.
-* Generated a synthetic regression dataset using Scikit-learn's `make_regression`.
-* Created a dataset with:
-  * **100 samples**
-  * **2 features**
-  * **2 informative features**
-  * **1 target**
-* Added noise to the generated data.
-* Converted the generated NumPy arrays into a **Pandas DataFrame**.
-* Explored the generated dataset containing:
-  * `feature1`
-  * `feature2`
-  * `target`
-* Visualized the relationship between the two features and target using a **3D scatter plot**.
-* Split the dataset into training and testing sets.
-* Implemented Multiple Linear Regression using Scikit-learn's `LinearRegression`.
-* Trained the model using multiple input features.
-* Generated predictions on the test dataset.
-* Evaluated the model using:
-  * **Mean Absolute Error (MAE)**
-  * **Mean Squared Error (MSE)**
-  * **R² Score**
-* Visualized the fitted Multiple Linear Regression model as a **3D regression plane** using Plotly.
-* Understood the geometric representation of Multiple Linear Regression.
-
-The model in the notebook produced the following evaluation results:
-
-| Metric   |     Score |
-| -------- | --------: |
-| MAE      |   41.9547 |
-| MSE      | 2266.0802 |
-| R² Score |    0.5146 |
-
-The notebook also creates a 3D visualization containing the original data points and the fitted regression surface.
+* **Dataset:** Synthetic regression dataset (`100` samples, `2` features, added Gaussian noise) generated using Scikit-learn's `make_regression`.
+* **Implementation:** Built Multiple Linear Regression using Scikit-learn's `LinearRegression`.
+* **Metrics Obtained:**
+  * **MAE:** $41.9547$
+  * **MSE:** $2266.0802$
+  * **$R^2$ Score:** $0.5146$
+* **Visualization:** Interactive 3D scatter plots and fitted 3D regression planes generated using Plotly.
 
 ---
 
 ### 5. `LR_MultipleLR_Scratch.ipynb`
+* **Dataset:** Scikit-learn's Diabetes Dataset (`442` samples, `10` features).
+* **Implementation:** Created a custom `MLR` class to solve Multiple Linear Regression analytically.
+* **Math Derived:** Added a column of ones for the bias/intercept term and implemented the **Normal Equation**:
 
-**What I covered:**
-* Implemented **Multiple Linear Regression from scratch** without directly using Scikit-learn's regression model.
-* Used Scikit-learn's **Diabetes dataset** through `load_diabetes()`.
-* Loaded the feature matrix `X` and target variable `y`.
-* Split the dataset into training and testing sets using `train_test_split`.
-* First implemented Multiple Linear Regression using Scikit-learn's `LinearRegression` as a reference model.
-* Trained the Scikit-learn model and generated predictions on the test dataset.
-* Evaluated the Scikit-learn model using the **R² Score**.
-* Examined the learned **coefficients** and **intercept**.
+  $$\beta = (X^T X)^{-1} X^T y$$
 
-#### Multiple Linear Regression from Scratch
-* Created a custom `MLR` class to implement Multiple Linear Regression.
-* Defined the model with:
-  * `fit()` method for calculating model parameters.
-  * `predict()` method for generating predictions.
-* Added a column of ones to the feature matrix to incorporate the **intercept term**.
-* Implemented the **Normal Equation** using NumPy:
-
-  **`β = (XᵀX)⁻¹Xᵀy`**
-
-* Used matrix operations such as `np.insert()`, `np.dot()`, and `np.linalg.inv()`.
-* Extracted the first value of the calculated parameter vector as the **intercept**.
-* Stored the remaining values as the **coefficients** of the input features.
-* Used the learned coefficients and intercept to generate predictions manually.
-* Evaluated the custom Multiple Linear Regression model using the **R² Score**.
-* Printed and compared the learned **coefficients** and **intercept** of the custom implementation.
+* **Validation:** Verified custom matrix operations (`np.dot`, `np.linalg.inv`) directly against Scikit-learn's benchmark parameters and $R^2$ score.
 
 ---
 
 ### 6. `LR_Assumptions_of_LR.ipynb`
-
-**What I covered:**
-This notebook focuses on understanding the important **assumptions of Linear Regression** that should be considered when building and interpreting regression models.
-
-#### 1. Linear Relationship
-* Studied the assumption that there should be a **linear relationship** between the independent variables and the dependent variable.
-* Understood why Linear Regression works best when the relationship between predictors and the target can be reasonably represented using a linear function.
-
-#### 2. Multicollinearity
-* Studied **Multicollinearity**, where independent features are strongly related to each other.
-* Used the **Variance Inflation Factor (VIF)** concept to identify multicollinearity.
-* Observed that higher VIF values indicate stronger multicollinearity (values **greater than 5** indicate Multicollinearity).
-
-#### 3. Normality of Residuals
-* Studied the **Normality of Residuals** assumption.
-* Understood the importance of examining the distribution of residuals when validating a Linear Regression model.
-
-#### 4. Homoscedasticity
-* Studied **Homoscedasticity**, which refers to the residuals having a relatively uniform spread across predicted/independent values.
-
-#### 5. No Autocorrelation of Residuals
-* Studied the assumption of **No Autocorrelation of Residuals**.
-* Understood that residuals should not exhibit a systematic relationship with one another.
+Focused on testing and validating the fundamental assumptions required for linear modeling:
+1. **Linear Relationship:** Linear dependence between predictors and target.
+2. **Multicollinearity:** Evaluated using the **Variance Inflation Factor (VIF)**. Values $> 5$ indicate significant multicollinearity.
+3. **Normality of Residuals:** Analyzed residual error distribution graphs.
+4. **Homoscedasticity:** Checked for uniform variance of residual errors across predictions.
+5. **No Autocorrelation of Residuals:** Ensured independence between residual errors.
 
 ---
 
 ### 7. `LR_GradientDescent_from_Scratch.ipynb`
+* **Concepts:** First-principles implementation of **Batch Gradient Descent (BGD)**.
+* **Implementation:** Developed a custom `GDRegressor` class.
+* **Math Derived:** Computed gradients over the entire dataset per epoch to update parameters:
 
-**What I covered:**
-This notebook focuses on understanding and implementing **Linear Regression using Batch Gradient Descent from scratch**.
+  $$\frac{\partial L}{\partial b} = -2 \sum (y_i - (mx_i + b))$$
 
-#### Dataset Generation & Scikit-learn Model
-* Generated a synthetic regression dataset using Scikit-learn's `make_regression` (100 samples, 1 feature).
-* Trained Scikit-learn's `LinearRegression` as a benchmark.
-* Used **10-fold cross-validation** with the R² scoring metric.
+  $$\frac{\partial L}{\partial m} = -2 \sum (y_i - (mx_i + b))x_i$$
 
-#### Gradient Descent from Scratch
-* Created a custom `GDRegressor` class to implement Linear Regression using **Gradient Descent**.
-* Defined parameters: `learning_rate` and `epochs`.
-* Updated slope (`m`) and intercept (`b`) using their full-dataset derivatives:
-  
-  **`loss_slope_b = -2 × Σ(y - mx - b)`**
-  
-  **`loss_slope_m = -2 × Σ((y - mx - b)x)`**
-
-#### Effect of Learning Rate and Epochs
-* Experimented with hyperparameter tuning to avoid divergence and achieve stable convergence near Scikit-learn results.
+* **Hyperparameter Tuning:** Evaluated the effect of learning rates ($\eta$) and epoch counts on convergence stability.
 
 ---
 
 ### 8. `LR_SGDRegressor_from_Scratch.ipynb`
+* **Dataset:** Diabetes Dataset (`442` samples, `10` features).
+* **Implementation:** Built a custom `SGDRegressor` for **Stochastic Gradient Descent (SGD)** from scratch and benchmarked against `sklearn.linear_model.SGDRegressor`.
+* **Update Rule:** Updated weight vectors sample-by-sample ($1$ observation at a time) using randomly chosen indices per epoch:
 
-**What I covered:**
-This notebook covers the step-by-step implementation of **Stochastic Gradient Descent (SGD) for Multiple Linear Regression from scratch** and compares it directly with Scikit-learn's built-in `SGDRegressor`.
+  $$y_{hat} = X_i \cdot W + b$$
+  $$\frac{\partial L}{\partial b} = -2(y_i - y_{hat}), \quad \frac{\partial L}{\partial W} = -2(y_i - y_{hat})X_i$$
 
-#### Dataset & Reference Linear Regression
-* Loaded the **Diabetes Dataset** (`442` samples, `10` features) using Scikit-learn.
-* Applied an `80-20` train-test split with `random_state=2`.
-* Trained a reference Scikit-learn `LinearRegression` model to extract reference coefficients and intercept.
-
-#### Custom `SGDRegressor` Implementation (From Scratch)
-* Created a custom class `SGDRegressor` with configurable `learning_rate` and `epochs`.
-* Initialized the intercept (`0`) and coefficients (`np.ones(n_features)`).
-* Implemented stochastic updates: for each epoch, iterating over dataset samples selecting random indices (`np.random.randint`):
-  * Calculated predicted single-point target `y_hat` using vector dot product:
-    
-    **`y_hat = Xᵢ · W + b`**
-    
-  * Derived gradients per instance for intercept and coefficients:
-    
-    **`∂L/∂b = -2 × (yᵢ - y_hat)`**
-    
-    **`∂L/∂W = -2 × (yᵢ - y_hat) × Xᵢ`**
-    
-  * Updated parameters in real-time per sample.
-* Calculated total training runtime using Python's `time` module.
-* Achieved an R² Score of **~0.418** on the test split.
-
-#### Scikit-learn `SGDRegressor` Comparison
-* Used `sklearn.linear_model.SGDRegressor` configured with constant learning rate (`learning_rate='constant'`, `eta0=0.01`, `max_iter=100`).
-* Evaluated predictions against the custom class, obtaining a comparable R² Score of **~0.432**.
+* **Results:** Custom class achieved $R^2 \approx 0.418$; Scikit-learn achieved $R^2 \approx 0.432$.
 
 ---
 
 ### 9. `LR_Mini_Batch_GD_Scratch.ipynb`
+* **Dataset:** Diabetes Dataset (`442` samples, `10` features).
+* **Implementation:** Vectorized **Mini-Batch Gradient Descent (MBGD)** built from scratch and compared against baseline OLS and Scikit-learn's `SGDRegressor`.
+* **Custom MBGD:** Utilized random sub-batches (`batch_size ≈ 7`, `lr = 0.01`, `epochs = 75`) to compute batch gradients:
 
-**What I covered:**
-This notebook focuses on the concept and vectorized implementation of **Mini-Batch Gradient Descent (MBGD)** for Multiple Linear Regression from scratch and compares it against standard OLS and Scikit-learn's `SGDRegressor`.
+  $$\frac{\partial L}{\partial W} = -2 \cdot (y_{\text{batch}} - y_{\text{hat}})^T \cdot X_{\text{batch}}$$
 
-#### Dataset & Baseline Standard OLS
-* Utilized Scikit-learn's **Diabetes Dataset** (`442` rows, `10` features) with an 80-20 train-test split (`random_state=2`).
-* Baseline `LinearRegression` model achieved an R² Score of **0.4399** on the test set.
-
-#### Custom `MBGDRegressor` Implementation (From Scratch)
-* Created a custom class `MBGDRegressor` configurable with `batch_size`, `learning_rate`, and `epochs`.
-* Initialized intercept to `0` and feature weights to vector of `1`s.
-* Implemented mini-batch update loops:
-  * Sampled random subset indices of size `batch_size` using Python's `random.sample()`.
-  * Computed vectorized predictions: **`y_hat = X_batch · W + b`**.
-  * Derived mini-batch gradients:
-    
-    **`∂L/∂b = -2 × mean(y_batch - y_hat)`**
-    
-    **`∂L/∂W = -2 × (y_batch - y_hat)ᵀ · X_batch`**
-    
-  * Scaled step updates using `self.lr`.
-* Trained using `batch_size ≈ 7` (`X_train.shape[0] / 50`), `learning_rate = 0.01`, and `epochs = 75`.
-* Achieved an R² Score of **0.4472** on the test split.
-
-#### Scikit-learn `SGDRegressor` via `partial_fit`
-* Configured Scikit-learn's `SGDRegressor(learning_rate='constant', eta0=0.2)`.
-* Applied an explicit mini-batch loop processing batches of `35` samples using `partial_fit()` over 100 iterations.
-* Achieved an R² Score of **0.4315**.
+* **Partial Fit:** Evaluated streaming mini-batch execution using Scikit-learn's `.partial_fit()` method.
+* **Results:** Custom MBGD achieved $R^2 = 0.4472$; Scikit-learn `partial_fit` achieved $R^2 = 0.4315$.
 
 ---
 
 ### 10. `Polynomial_Regression.ipynb`
-
-**What I covered:**
-This notebook introduces **Polynomial Regression** to model non-linear relationships between independent features and continuous target variables.
-
-#### Non-Linear Dataset Generation
-* Synthetic non-linear dataset generated using a quadratic equation with random Gaussian noise:
-  
-  **`y = 0.8x² + 0.9x + 2 + noise`**
-
-* Sample size: `200` points generated in the range `[-3, 3]`.
-* Visualized non-linear distribution using Matplotlib 2D scatter plots.
-
-#### Linear Regression Baseline
-* Applied standard Scikit-learn `LinearRegression` directly to non-linear data.
-* Train-test split: `80-20` with `random_state=2`.
-* Evaluated baseline performance using **R² Score**, yielding a low score of **~0.2691** due to underfitting.
-
-#### Key Takeaways
-* Demonstrated why standard Linear Regression fails when underlying data exhibits non-linear quadratic trends.
-* Prepared workflow for transforming feature spaces using `PolynomialFeatures` and building Machine Learning `Pipeline` pipelines.
+* **Dataset:** Non-linear quadratic synthetic dataset ($y = 0.8x^2 + 0.9x + 2 + \text{noise}$).
+* **Underfitting Analysis:** Standard Linear Regression achieved a poor $R^2 \approx 0.2691$ due to high bias.
+* **Polynomial Features:** Applied feature transformation via `PolynomialFeatures` to capture quadratic boundaries and curved data trends.
 
 ---
 
-## Simple vs Multiple vs Polynomial Linear Regression
+### 11. `Ridge_Regression.ipynb` *(Newly Added)*
+* **Concepts:** Introduction to **L2 Regularization (Ridge Regression)** to prevent model overfitting and mitigate multicollinearity by shrinking coefficient magnitudes.
+* **Dataset:** Synthetic 1D regression dataset generated via `make_regression` (`100` samples, noise added, `random_state=13`).
+* **Implementation:** Compared standard Scikit-learn `LinearRegression` against `Ridge` regression across different penalty parameter strengths ($\alpha$).
+* **Model Benchmark & Parameter Shrinkage:**
 
-### Simple Linear Regression
-Uses **one independent linear feature** to predict the target.
+  | Model | Penalty Strength ($\alpha$) | Learned Slope ($m$) | Intercept ($b$) |
+  | :--- | :--- | :--- | :--- |
+  | **Linear Regression** | $\alpha = 0$ | $27.8281$ | $-2.2947$ |
+  | **Ridge Regression** | $\alpha = 10$ | $24.9546$ | $-2.1269$ |
+  | **Ridge Regression** | $\alpha = 100$ | $12.9344$ | $-1.4248$ |
 
-**`y = mx + b`**
+* **Key Observations:** As $\alpha$ increases, the penalty forces the coefficient values closer to zero, smoothing model variance while reducing sensitivity to noisy data points.
+
+---
+### Mathematical Overview
+
+* **Simple Linear Regression:** 
+  $$y = mx + b$$
+* **Multiple Linear Regression:** 
+  $$y = b_0 + b_1 x_1 + b_2 x_2 + \dots + b_n x_n$$
+* **Polynomial Regression:** 
+  $$y = b_0 + b_1 x + b_2 x^2 + \dots + b_n x^n$$
+* **Ridge Regression (L2 Loss Minimization):** 
+  $$\text{Cost} = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 + \alpha \sum_{j=1}^{p} w_j^2$$
 
 ---
 
-### Multiple Linear Regression
-Uses **multiple independent features** to predict the target.
+## Optimization Approaches Summary
 
-**`y = b₀ + b₁x₁ + b₂x₂ + ... + bₙxₙ`**
+1. **Analytical Approaches (Exact Closed-Form):**
+   * **Ordinary Least Squares (OLS):** Used for single-variable direct mathematical parameter resolution.
+   * **Normal Equation:** Matrix inversion $\beta = (X^T X)^{-1} X^T y$ for multi-feature optimization.
 
-The `LR_MultipleLinearRegression.ipynb` notebook demonstrates Multiple Linear Regression using two features, while `LR_MultipleLR_Scratch.ipynb`, `LR_SGDRegressor_from_Scratch.ipynb`, and `LR_Mini_Batch_GD_Scratch.ipynb` extend the implementation to the **10-feature Diabetes dataset**.
+2. **Iterative Numerical Optimization:**
+   * **Batch Gradient Descent:** Computes updates using the entire dataset per epoch (stable, high memory usage).
+   * **Stochastic Gradient Descent (SGD):** Computes updates observation-by-observation (fast, noisy updates).
+   * **Mini-Batch Gradient Descent (MBGD):** Computes updates over subset blocks (`batch_size`), balancing vector computational speed and update stability.
 
----
-
-### Polynomial Regression
-Extends linear regression by modeling relationships as an **n-th degree polynomial** to capture non-linear patterns.
-
-**`y = b₀ + b₁x + b₂x² + ... + bₙxⁿ`**
-
-Demonstrated in `Polynomial_Regression.ipynb` using a non-linear quadratic dataset.
-
----
-
-## Linear Regression Optimization Approaches
-
-This folder highlights three fundamental methods to compute or approximate regression parameters:
-
-### 1. Analytical Approach
-* **Ordinary Least Squares (OLS):** Used in `LR_SimpleLinearRegression_OLS_scratch.ipynb` for single-variable closed-form updates.
-* **Normal Equation:** Used in `LR_MultipleLR_Scratch.ipynb` via matrix inverse:
-
-  **`β = (XᵀX)⁻¹Xᵀy`**
-
-### 2. Iterative Optimization Approaches
-* **Batch Gradient Descent:** Used in `LR_GradientDescent_from_Scratch.ipynb`, updating weights using gradients calculated over the *entire dataset* in each iteration.
-* **Stochastic Gradient Descent (SGD):** Used in `LR_SGDRegressor_from_Scratch.ipynb`, updating weights *sample-by-sample* (`1` observation at a time), making it computationally efficient for massive datasets.
-* **Mini-Batch Gradient Descent (MBGD):** Used in `LR_Mini_Batch_GD_Scratch.ipynb`, updating weights over small random subsets (`batch_size`), balancing vector computational speed and update stability.
-
----
-
-## Assumptions of Linear Regression
-
-1. **Linear Relationship:** Linear dependence between features and target.
-2. **No Multicollinearity:** Predictors are not strongly correlated (checked via **VIF < 5**).
-3. **Normality of Residuals:** Residual errors follow a Gaussian distribution.
-4. **Homoscedasticity:** Constant variance of residual errors.
-5. **No Autocorrelation of Residuals:** Independent residuals across observations.
+3. **Regularized Shrinkage Optimization:**
+   * **Ridge (L2):** Adds a squared penalty term ($\alpha$) to constrain weights, reducing model complexity and overfitting.
 
 ---
 
 ## Regression Evaluation Metrics
 
-* **Mean Absolute Error (MAE):** Average magnitude of absolute errors.
-* **Mean Squared Error (MSE):** Average of squared errors (penalizes large outliers).
-* **Root Mean Squared Error (RMSE):** Square root of MSE, returned in target units.
-* **R² Score:** Variance explained ratio relative to a baseline mean model.
-* **Adjusted R² Score:** Penalizes addition of non-informative noise features.
+* **Mean Absolute Error (MAE):** Measures average absolute deviation magnitude.
+* **Mean Squared Error (MSE):** Squares deviations, severely penalizing larger outliers.
+* **Root Mean Squared Error (RMSE):** Square root of MSE, expressing error back in original target variable units.
+* **$R^2$ Score:** Indicates the proportion of target variance explained by model features relative to a baseline mean model.
+* **Adjusted $R^2$ Score:** Modifies $R^2$ by penalizing non-informative features added to the model.
 
 ---
 
-## Libraries Used
+## Assumptions of Linear Regression
 
-* **Pandas** — Data loading, manipulation, and exploration
-* **NumPy** — Numerical operations, array manipulation, dot products, matrix operations, and mini-batch indexing
-* **Matplotlib** — 2D visualizations and regression line plotting
-* **Plotly** — Interactive 3D surface and regression plane visualizations
-* **Scikit-learn** — Machine learning algorithms (`LinearRegression`, `SGDRegressor`), metrics (`r2_score`), preprocessing (`PolynomialFeatures`, `StandardScaler`), pipelines (`Pipeline`), datasets (`load_diabetes`, `make_regression`), and splitting (`train_test_split`)
-* **Statsmodels** — Statistical diagnostics and VIF computation
-* **Time & Random** — Computational runtime benchmarking and mini-batch sample selection
+1. **Linearity:** Independent variables have a linear relationship with the target.
+2. **No Multicollinearity:** Independent predictors are not highly correlated ($VIF < 5$).
+3. **Normality of Residuals:** Residual errors follow a zero-mean Gaussian distribution.
+4. **Homoscedasticity:** Residual variance remains constant across all fitted values.
+5. **No Autocorrelation:** Residuals are independent of each other across time or observations.
 
 ---
 
-## What I Learned
+## Libraries & Tools Used
 
-* Difference between analytical exact solvers (**OLS, Normal Equation**) and iterative numerical approximations (**Batch GD, SGD, Mini-Batch GD**).
-* How to manually code stochastic and mini-batch parameter updates per instance using vectorized NumPy operations (`np.dot`).
-* Trade-offs of mini-batch sizes: mini-batch optimization provides reduced noise over SGD and lower computational cost per epoch compared to full Batch GD.
-* Leveraging Scikit-learn's `.partial_fit()` method on `SGDRegressor` to handle custom batch sizes for online and mini-batch streaming training workflows.
-* Modeling non-linear dataset patterns using non-linear synthetic equations and analyzing why linear regression models underfit quadratic boundaries.
-* Benchmarking custom linear algebra code against battle-tested Scikit-learn standard estimators (`LinearRegression`, `SGDRegressor`).
+* **Pandas** — Data manipulation, CSV parsing, and DataFrame transformations.
+* **NumPy** — Linear algebra computations, matrix inversions, dot products, and array manipulations.
+* **Matplotlib** — 2D scatter plots, residual distribution plots, and line visualizations.
+* **Plotly** — Interactive 3D scatter plots and surface regression planes.
+* **Scikit-learn** — Estimators (`LinearRegression`, `Ridge`, `SGDRegressor`), dataset generators (`make_regression`, `load_diabetes`), evaluation metrics (`r2_score`), and feature transformers (`PolynomialFeatures`, `StandardScaler`).
+* **Statsmodels** — Diagnostic statistical tools and VIF calculation.
 
 ---
 
-## Progression
+---
 
-**Simple Linear Regression**  
-↓  
-**Simple Linear Regression from Scratch (OLS)**  
-↓  
-**Regression Evaluation Metrics**  
-↓  
-**Multiple Linear Regression using Scikit-learn**  
-↓  
-**Multiple Linear Regression from Scratch (Normal Equation)**  
-↓  
-**Assumptions of Linear Regression**  
-↓  
-**Batch Gradient Descent from Scratch**  
-↓  
-**Stochastic Gradient Descent (SGD) from Scratch & Scikit-learn**  
-↓  
-**Mini-Batch Gradient Descent (MBGD) from Scratch & Scikit-learn**  
-↓  
-**3D Visualization of Regression Planes**  
-↓  
-**Polynomial Regression (Handling Non-Linear Datasets)**
+## Key Learnings & Takeaways
+
+* Applied exact closed-form solvers (**OLS, Normal Equation**) alongside approximate iterative solvers (**Batch, Stochastic, and Mini-Batch GD**).
+* Mastered low-level vectorized NumPy updates for stochastic and mini-batch gradient calculations.
+* Leveraged Scikit-learn's `.partial_fit()` API for online and streaming mini-batch workflows.
+* Addressed non-linear structural patterns using polynomial feature expansions.
+* Observed the direct impact of **L2 Regularization (Ridge)** in shrinking weight magnitudes ($\alpha = 0 \rightarrow \alpha = 100$) to control model variance and prevent overfitting.
+* Benchmarked custom Python linear algebra implementations directly against optimized Scikit-learn estimators.
