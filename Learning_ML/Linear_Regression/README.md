@@ -2,7 +2,7 @@
 
 This repository contains my practice and hands-on implementations of **regression algorithms using Python**, with an emphasis on understanding the mathematical foundations behind each model and implementing them both through **Scikit-learn** and **from scratch** where applicable.
 
-The repository progressively explores **Simple Linear Regression, Multiple Linear Regression, Regression Evaluation Metrics, Linear Regression Assumptions, Batch Gradient Descent, Stochastic Gradient Descent, Mini-Batch Gradient Descent, Polynomial Regression, Ridge Regression (L2 Regularization), Ridge Regression using Gradient Descent, key concepts behind Ridge Regression, and Lasso Regression (L1 Regularization)**.
+The repository progressively explores **Simple Linear Regression, Multiple Linear Regression, Regression Evaluation Metrics, Linear Regression Assumptions, Batch Gradient Descent, Stochastic Gradient Descent, Mini-Batch Gradient Descent, Polynomial Regression, Ridge Regression (L2 Regularization), Ridge Regression using Gradient Descent, key concepts behind Ridge Regression, Lasso Regression (L1 Regularization), and Elastic Net Regression**.
 
 The primary goal of this repository is to bridge **theoretical mathematical concepts with practical machine learning implementations**, including model training, optimization, evaluation, diagnostics, regularization, visualization, and comparison between different approaches.
 
@@ -147,7 +147,7 @@ epochs = 75
 **Results:**
 
 ```text
-Custom MBGD:             R² = 0.4472
+Custom MBGD:              R² = 0.4472
 Scikit-learn partial_fit: R² = 0.4315
 ```
 
@@ -476,6 +476,124 @@ This notebook provides a practical introduction to:
 
 ---
 
+### 15. `LR_ElasticNetRegression.ipynb`
+
+This notebook introduces **Elastic Net Regression**, combining the ideas of **Ridge Regression (L2)** and **Lasso Regression (L1)** into a single regularized regression model.
+
+The notebook uses the **Diabetes Dataset** from Scikit-learn and compares different linear regression models using the same train-test split.
+
+#### 1. Dataset and Train-Test Split
+
+- **Dataset:** Scikit-learn's Diabetes Dataset.
+- Used `load_diabetes(return_X_y=True)` to obtain the features and target.
+- Dataset contains 442 observations and 10 features.
+- Applied an 80/20 train-test split.
+- Used:
+
+```python
+train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=2
+)
+```
+
+#### 2. Linear Regression
+
+A standard `LinearRegression` model was trained as the baseline model.
+
+```python
+reg = LinearRegression()
+reg.fit(X_train, y_train)
+
+y_pred = reg.predict(X_test)
+r2_score(y_test, y_pred)
+```
+
+This provides a baseline R² score against which the regularized models can be compared.
+
+#### 3. Ridge Regression
+
+The notebook then applies Ridge Regression using L2 regularization:
+
+```python
+reg = Ridge(alpha=0.1)
+reg.fit(X_train, y_train)
+
+y_pred = reg.predict(X_test)
+r2_score(y_test, y_pred)
+```
+
+- **Regularization:** L2
+- **Alpha:** `0.1`
+
+#### 4. Lasso Regression
+
+Lasso Regression is then applied using L1 regularization:
+
+```python
+reg = Lasso(alpha=0.01)
+reg.fit(X_train, y_train)
+
+y_pred = reg.predict(X_test)
+r2_score(y_test, y_pred)
+```
+
+- **Regularization:** L1
+- **Alpha:** `0.01`
+
+#### 5. Elastic Net Regression
+
+Finally, Elastic Net Regression is applied:
+
+```python
+reg = ElasticNet(
+    alpha=0.005,
+    l1_ratio=0.9
+)
+
+reg.fit(X_train, y_train)
+
+y_pred = reg.predict(X_test)
+r2_score(y_test, y_pred)
+```
+
+- **Alpha:** `0.005`
+- **L1 Ratio:** `0.9`
+
+Elastic Net combines both L1 and L2 regularization.
+
+Conceptually:
+
+```text
+Elastic Net
+     │
+     ├── L1 Regularization
+     │      └── Lasso-like coefficient shrinkage
+     │
+     └── L2 Regularization
+            └── Ridge-like coefficient shrinkage
+```
+
+#### Learning Focus
+
+This notebook provides a practical comparison of:
+
+- Linear Regression
+- Ridge Regression
+- Lasso Regression
+- Elastic Net Regression
+- L1 Regularization
+- L2 Regularization
+- The `alpha` parameter
+- The `l1_ratio` parameter
+- Model evaluation using R² Score
+
+It extends the regularization section of the repository from individual L1 and L2 techniques to a model that combines both approaches.
+
+---
+
 ## Mathematical Overview
 
 ### Simple Linear Regression
@@ -563,15 +681,43 @@ Increasing `α` encourages coefficients to become smaller, and L1 regularization
 
 ---
 
-### Ridge vs. Lasso
+### Elastic Net Regression
 
-| Property | Ridge | Lasso |
-|---|---|---|
-| Regularization | L2 | L1 |
-| Penalty | `αΣw²` | `αΣ|w|` |
-| Coefficient Effect | Shrinks coefficients | Shrinks coefficients and can set some to zero |
-| Feature Selection | Generally no | Can perform feature selection |
-| Strong Regularization | Can lead to underfitting | Can lead to underfitting |
+Elastic Net combines both L1 and L2 regularization.
+
+Conceptually, its objective contains both penalties:
+
+```text
+Cost = Prediction Error
+       + L1 Penalty
+       + L2 Penalty
+```
+
+The `l1_ratio` parameter controls the balance between the two types of regularization.
+
+```text
+l1_ratio = 1
+    ↓
+Pure L1 / Lasso-like behavior
+
+l1_ratio = 0
+    ↓
+Pure L2 / Ridge-like behavior
+```
+
+Thus, Elastic Net provides a flexible way to combine the coefficient-shrinking behavior of Ridge with the feature-selection capability of Lasso.
+
+---
+
+### Ridge vs. Lasso vs. Elastic Net
+
+| Property | Ridge | Lasso | Elastic Net |
+|---|---|---|---|
+| Regularization | L2 | L1 | L1 + L2 |
+| Penalty | `αΣw²` | `αΣ|w|` | L1 + L2 |
+| Coefficient Effect | Shrinks coefficients | Shrinks coefficients and can set some to zero | Shrinks coefficients and can set some to zero |
+| Feature Selection | Generally no | Can perform feature selection | Can perform feature selection |
+| Main Parameter | `alpha` | `alpha` | `alpha`, `l1_ratio` |
 
 ---
 
@@ -644,13 +790,17 @@ Implements regularized regression through an iterative optimization approach.
 
 Adds an absolute coefficient penalty to the loss and can shrink some coefficients to zero.
 
+### Elastic Net Regression
+
+Combines L1 and L2 regularization and provides control over the balance between the two through `l1_ratio`.
+
 ### Coefficient Shrinkage
 
 Increasing `alpha` increases the strength of regularization and reduces the magnitude of model coefficients.
 
 ### Feature Selection
 
-L1 regularization can force some coefficients to exactly zero, making Lasso useful for identifying less important features.
+L1 regularization can force some coefficients to exactly zero, making Lasso useful for identifying less important features. Elastic Net retains this L1 component while also incorporating L2 regularization.
 
 ### Bias-Variance Tradeoff
 
@@ -725,10 +875,12 @@ Extends R² by taking the number of predictors into account and penalizing unnec
 - Used Polynomial Feature Expansion to model non-linear relationships.
 - Studied the effect of L2 Regularization through Ridge Regression.
 - Studied the effect of L1 Regularization through Lasso Regression.
+- Studied Elastic Net Regression as a combination of L1 and L2 regularization.
 - Observed how the regularization parameter `alpha` influences model complexity and coefficient behavior.
 - Studied how increasing `alpha` causes coefficient shrinkage.
 - Explored why larger coefficients are affected more strongly by L2 regularization.
 - Learned that L1 regularization can shrink some coefficients completely to zero.
+- Studied how `l1_ratio` controls the balance between L1 and L2 regularization in Elastic Net.
 - Applied Ridge Regression to a high-degree polynomial model to study the effect of different regularization strengths.
 - Applied Lasso Regression to a high-degree polynomial model to study the effect of different regularization strengths.
 - Studied the bias-variance tradeoff as regularization strength changes.
@@ -736,7 +888,8 @@ Extends R² by taking the number of predictors into account and penalizing unnec
 - Compared overfitting, optimal fitting, and underfitting under different regularization strengths.
 - Implemented and explored Ridge Regression using Gradient Descent.
 - Compared `SGDRegressor`, Scikit-learn Ridge, and custom Ridge Gradient Descent implementations.
-- Developed a stronger understanding of the relationship between optimization algorithms, regularization, model complexity, bias, variance, and practical machine learning performance.
+- Compared Linear Regression, Ridge, Lasso, and Elastic Net on the Diabetes Dataset.
+- Developed a stronger understanding of the relationship between optimization algorithms, regularization, model complexity, bias, variance, feature selection, and practical machine learning performance.
 
 ---
 
@@ -772,6 +925,8 @@ Ridge Regression with Gradient Descent
 Ridge Regression Key Concepts
         ↓
 Lasso Regression / L1 Regularization
+        ↓
+Elastic Net Regression
 ```
 
 The progression moves from the mathematical foundations of regression toward optimization, non-linearity, regularization, coefficient shrinkage, feature selection, bias-variance tradeoffs, and iterative model training, building a practical understanding of how regression models are constructed, optimized, evaluated, and controlled for overfitting.
