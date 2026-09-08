@@ -155,9 +155,38 @@ From this notebook, I learned:
 
 ---
 
+## 📓 Notebook 2 — Perceptron Implementation & Visualizations
+
+### Overview
+
+Building directly upon the concepts from Notebook 1, this notebook focuses on hands-on code execution for the **Perceptron algorithm**[cite: 1]. 
+
+I implemented the algorithm using interactive Python execution to observe how the Perceptron iteratively updates its decision boundary line step-by-step until it successfully classifies a 2D dataset[cite: 1].
+
+---
+
+## 🧠 What I Learned
+
+### 1. Hands-on Perceptron Training Loop
+I learned how to structure the iterative loop that iterates over individual data points, evaluates binary step outputs, and applies the weight update rule dynamically[cite: 1].
+
+---
+
+### 2. Decision Boundary Plotting
+Using `matplotlib`, I generated 2D visual scatter plots of linear data distributions along with the shifting decision boundary[cite: 1]. This made it possible to see the line physically rotate and shift as misclassified points trigger updates[cite: 1].
+
+---
+
+## 🔑 Key Takeaways
+
+- Practical experience turning step-function and weight update logic into clean Python code[cite: 1].
+- Visual confirmation of how weight updates physically move the separating line across epochs[cite: 1].
+
+---
+
 ## 🔗 My Learning Progression
 
-This notebook establishes the foundation for the Logistic Regression concepts that I will explore in the upcoming notebooks.
+This progression maps out the concepts covered across both notebooks:
 
 ```text
 Binary Classification
@@ -166,23 +195,10 @@ Linear Decision Boundary
         ↓
 Step Function
         ↓
-Perceptron
+Perceptron (Theory & Mechanics)
         ↓
-Perceptron Trick
+Perceptron Trick & Weight Updates
         ↓
-Weight Updates
-        ↓
-Decision Boundary Visualization
+Hands-on Implementation & Matplotlib Visualizations
         ↓
 Logistic Regression
-```
-
----
-
-## 🚀 What's Next?
-
-This is the **first notebook** in my Logistic Regression learning path.
-
-Future notebooks will build upon these concepts and explore the mathematical and practical foundations of Logistic Regression in greater depth.
-
-The folder will be updated as I continue learning and implementing new concepts.
