@@ -2,11 +2,11 @@
 
 This folder contains my learning and hands-on implementation of **classification evaluation metrics** using **Scikit-Learn**.
 
-The notebook focuses on understanding how to evaluate classification models beyond just accuracy, using **Logistic Regression** and **Decision Tree Classifier** on real datasets.
+The notebooks focus on understanding how to evaluate classification models beyond just accuracy, using **Logistic Regression, Decision Tree, and SVM** on practical datasets.
 
 ---
 
-## 📓 Notebook: Classification_Metrics.ipynb
+## 📓 Notebook 1: `Classification_Metrics.ipynb`
 
 ### Topics
 
@@ -20,20 +20,54 @@ The notebook focuses on understanding how to evaluate classification models beyo
 * **Weighted Average**
 * **Support**
 * **Classification Report**
-* Comparing **Logistic Regression** and **Decision Tree** using different evaluation metrics
+* Comparing **Logistic Regression** and **Decision Tree Classifier**
 * Practical evaluation using **Heart Disease** and **Digits** datasets
+* Using `sklearn.metrics` for model evaluation
 
 ### Learning Outcomes
 
-* Understand how **accuracy** measures overall correct predictions.
-* Read and interpret a **confusion matrix** for multi-class classification.
+* Understand how **Accuracy** measures overall correct predictions.
+* Read and interpret a **Confusion Matrix**.
 * Understand the difference between **Precision, Recall, and F1 Score**.
-* Calculate metrics for **individual classes**.
+* Calculate and interpret **class-wise metrics**.
 * Understand **Macro** and **Weighted** averaging.
-* Understand **Support** and how class frequency affects evaluation.
+* Understand **Support** and its relation to class frequency.
 * Generate and interpret a **Classification Report**.
-* Compare different classification models using multiple evaluation metrics instead of relying only on accuracy.
-* Use `sklearn.metrics` for practical model evaluation.
+* Compare classification models using multiple evaluation metrics.
+* Understand why **accuracy alone is not sufficient** for evaluating a classification model.
+
+---
+
+## 📓 Notebook 2: `Classification_Metrics_ROC&AUC_Curve.ipynb`
+
+### Topics
+
+* **Probability Scores** using `predict_proba()`
+* **Classification Threshold**
+* **True Positive Rate (TPR)**
+* **False Positive Rate (FPR)**
+* **ROC Curve**
+* **ROC Curve Visualization**
+* Understanding **Thresholds** and their effect on TPR/FPR
+* Finding an **Optimal Classification Threshold**
+* **AUC — Area Under the Curve**
+* **ROC-AUC Score**
+* Comparing **Logistic Regression** and **SVM** using ROC-AUC
+* **Feature Scaling** using `StandardScaler` for SVM
+* Practical evaluation using the **Pima Indians Diabetes Dataset**
+
+### Learning Outcomes
+
+* Understand how classification models produce **probability scores**.
+* Understand how changing the **classification threshold** affects predictions.
+* Understand **TPR (Sensitivity)** and **FPR**.
+* Build and interpret a **ROC Curve**.
+* Understand the relationship between **threshold, TPR, and FPR**.
+* Find an **optimal threshold** using `TPR - FPR`.
+* Understand **AUC** as a measure of model discrimination.
+* Calculate and interpret the **ROC-AUC Score**.
+* Compare different classification models using **ROC-AUC**.
+* Understand the importance of **feature scaling** when working with SVM.
 
 ---
 
@@ -59,6 +93,20 @@ Macro & Weighted Average
 Support
       ↓
 Classification Report
+      ↓
+Probability Scores
+      ↓
+Classification Threshold
+      ↓
+TPR + FPR
+      ↓
+ROC Curve
+      ↓
+Optimal Threshold
+      ↓
+AUC / ROC-AUC
+      ↓
+Model Comparison
 ```
 
 ---
@@ -69,11 +117,15 @@ Classification Report
 * NumPy
 * Pandas
 * Matplotlib
+* Plotly
 * Scikit-Learn
 
 ---
 
-### Key Takeaway
+## 🎯 Key Takeaway
 
-> **A good classification model should not be judged by accuracy alone.**
-> Confusion Matrix, Precision, Recall, F1 Score, and other metrics provide a more complete picture of model performance.
+> **A classification model should not be judged by accuracy alone.**
+
+> Metrics such as **Precision, Recall, F1 Score, ROC-AUC, and the Confusion Matrix** provide a more complete understanding of model performance.
+
+> **ROC Curve and AUC** help evaluate how well a model distinguishes between classes across different classification thresholds.
