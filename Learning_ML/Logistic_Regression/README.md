@@ -2,7 +2,7 @@
 
 This folder contains my learning journey through **Logistic Regression**, starting from the basic idea of linear classification and gradually building towards understanding how Logistic Regression works internally.
 
-Each notebook in this folder focuses on a particular concept that contributes to understanding Logistic Regression, from the **Perceptron and linear decision boundaries** to implementing **Logistic Regression using Gradient Descent from scratch**.
+Each notebook in this folder focuses on a particular concept that contributes to understanding Logistic Regression, from the **Perceptron and linear decision boundaries** to implementing **Logistic Regression using Gradient Descent from scratch**, and finally extending Logistic Regression to **multi-class classification using Softmax Regression**.
 
 ---
 
@@ -16,142 +16,75 @@ I started with a simple **binary classification dataset** containing two feature
 
 The main focus of this notebook was understanding the **Perceptron Trick** and how a linear classifier can learn a decision boundary by repeatedly updating its weights.
 
----
+### 🧠 What I Learned
 
-## 🧠 What I Learned
+#### 1. Binary Classification
 
-### 1. Binary Classification
+* Difference between regression and classification.
+* Understanding binary classification.
+* Predicting discrete classes instead of continuous values.
 
-I learned the basic idea behind binary classification, where the goal is to assign each data point to one of two classes.
+#### 2. Linear Decision Boundary
 
-I also understood how classification differs from regression:
+* How a linear classifier separates two classes.
+* Understanding the decision boundary geometrically.
+* How weights determine the position and orientation of the boundary.
 
-* Regression predicts continuous numerical values.
-* Classification predicts discrete classes.
+#### 3. Perceptron
 
----
+* Working principle of the Perceptron.
+* Weighted sum of input features.
+* Binary prediction.
+* Weight updates based on incorrect predictions.
 
-### 2. Linear Decision Boundary
+#### 4. Perceptron Trick
 
-I learned how a linear classifier separates two classes using a **decision boundary**.
+* Understanding how the Perceptron updates its weights.
+* Moving the decision boundary to improve classification.
+* Learning from incorrect predictions.
 
-For a two-feature dataset, this boundary can be represented as a straight line.
+#### 5. Step Function
 
-The position and orientation of this line depend on the model's learned weights.
+* Using a step function for binary classification.
+* Converting a score into Class 0 or Class 1.
 
----
+#### 6. Implementing the Perceptron From Scratch
 
-### 3. Perceptron
+* Initializing weights.
+* Generating predictions.
+* Identifying incorrect predictions.
+* Updating weights.
+* Observing how the decision boundary changes.
 
-I learned the basic working principle of the **Perceptron**, one of the simplest linear classification algorithms.
+#### 7. Understanding Weights Geometrically
 
-The Perceptron:
-
-1. Takes the input features.
-2. Calculates a weighted sum.
-3. Makes a binary prediction.
-4. Compares the prediction with the actual class.
-5. Updates its weights when the prediction is incorrect.
-
-This helped me understand how a machine-learning model can gradually learn from its mistakes.
-
----
-
-### 4. Perceptron Trick
-
-The main concept explored in this notebook was the **Perceptron Trick**.
-
-I learned how the model updates its weights based on the difference between the actual and predicted class.
-
-The basic idea is:
-
-> If the model makes a wrong prediction, adjust the weights so that the decision boundary moves in a direction that improves the classification.
-
-Repeated updates gradually move the decision boundary toward a position that correctly separates the classes.
-
----
-
-### 5. Step Function
-
-I learned how a **step function** can be used to convert the calculated score into a binary prediction.
-
-Conceptually:
-
-* Positive score → Class 1
-* Non-positive score → Class 0
-
-This provided an intuitive understanding of how the Perceptron makes classification decisions.
-
----
-
-### 6. Implementing the Perceptron From Scratch
-
-Instead of directly using a machine-learning library, I implemented the Perceptron learning process myself.
-
-Through this, I understood:
-
-* How weights are initialized.
-* How predictions are generated.
-* How incorrect predictions are identified.
-* How weights are updated.
-* How the decision boundary changes as the model learns.
-
-This helped me move away from treating machine-learning algorithms as black boxes.
-
----
-
-### 7. Understanding Weights Geometrically
-
-I learned that the weights are not just numerical parameters.
-
-They determine the **position and orientation of the decision boundary**.
-
-By changing the weights, the boundary changes its:
+Understanding how weights affect:
 
 * Slope
 * Position
 * Orientation
 
-This helped me connect the mathematical representation of a classifier with its geometric interpretation.
+of the decision boundary.
 
----
+#### 8. Visualizing the Learning Process
 
-### 8. Visualizing the Learning Process
+* Plotting data points and decision boundaries.
+* Observing how the boundary changes during training.
 
-I visualized the decision boundary along with the data points to understand how the classifier separates the two classes.
+#### 9. Perceptron vs Logistic Regression
 
-I also explored how the decision boundary changes during the learning process.
+* Understanding that both can produce a linear decision boundary.
+* Understanding the conceptual difference between Perceptron learning and Logistic Regression.
 
-This made it easier to understand that the model does not magically know the correct boundary—it gradually adjusts its parameters through repeated updates.
+### 🔑 Key Takeaways
 
----
-
-### 9. Perceptron vs Logistic Regression
-
-After implementing the Perceptron approach, I compared its decision boundary with the one obtained using **Scikit-Learn's Logistic Regression**.
-
-This helped me understand that although both methods can produce a linear decision boundary, they learn that boundary using different approaches.
-
-The Perceptron focuses on correctly classifying the training points, whereas Logistic Regression learns its parameters through an optimization-based approach.
-
----
-
-## 🔑 Key Takeaways
-
-From this notebook, I learned:
-
-* What binary classification means.
-* How a linear decision boundary separates classes.
-* How a Perceptron works.
-* How the step function is used for binary prediction.
-* How the Perceptron updates its weights.
-* How the Perceptron Trick works.
-* How weights influence the decision boundary.
-* How to implement a basic classifier from scratch.
-* How to visualize a classifier's decision boundary.
-* How the decision boundary changes during learning.
-* The conceptual difference between the Perceptron and Logistic Regression.
-* Why understanding the Perceptron is useful before studying Logistic Regression in detail.
+* Understanding binary classification.
+* Understanding linear decision boundaries.
+* Understanding the Perceptron and Perceptron Trick.
+* Implementing a classifier from scratch.
+* Understanding the role of weights.
+* Visualizing the learning process.
+* Building the foundation required to understand Logistic Regression.
 
 ---
 
@@ -159,36 +92,31 @@ From this notebook, I learned:
 
 ### Overview
 
-Building directly upon the concepts from Notebook 1, this notebook focuses on hands-on implementation of the **Perceptron algorithm**.
+Building directly upon the concepts from Notebook 1, this notebook focuses on the hands-on implementation of the **Perceptron algorithm**.
 
 I implemented the algorithm using Python to observe how the Perceptron iteratively updates its decision boundary until it successfully classifies a 2D dataset.
 
----
+### 🧠 What I Learned
 
-## 🧠 What I Learned
+#### 1. Hands-on Perceptron Training Loop
 
-### 1. Hands-on Perceptron Training Loop
+* Structuring the iterative training process.
+* Processing individual data points.
+* Applying the binary step function.
+* Updating weights dynamically.
 
-I learned how to structure the iterative training loop that goes through individual data points, evaluates the binary step output, and applies the weight update rule dynamically.
+#### 2. Decision Boundary Plotting
 
----
+Using `matplotlib`, I generated 2D scatter plots along with the decision boundary to observe how the boundary shifts during training.
 
-### 2. Decision Boundary Plotting
+### 🔑 Key Takeaways
 
-Using `matplotlib`, I generated 2D scatter plots of the data along with the decision boundary.
-
-This made it possible to visually observe how the decision boundary shifts as the model updates its weights.
-
----
-
-## 🔑 Key Takeaways
-
-* Practical experience turning the Perceptron theory into Python code.
-* Understanding the training loop of a linear classifier.
-* Applying the step function for binary classification.
-* Implementing weight updates programmatically.
-* Visualizing how weight updates affect the decision boundary.
-* Building a stronger foundation for understanding Logistic Regression.
+* Turning Perceptron theory into Python code.
+* Understanding the training loop.
+* Applying the step function.
+* Implementing weight updates.
+* Visualizing the effect of weight updates.
+* Strengthening the foundation for Logistic Regression.
 
 ---
 
@@ -198,17 +126,15 @@ This made it possible to visually observe how the decision boundary shifts as th
 
 This notebook takes the next step from the **Perceptron** and focuses on understanding how **Logistic Regression can be trained using Gradient Descent**.
 
-I first generated a simple **2D binary classification dataset** using Scikit-Learn's `make_classification`, which allowed me to visualize the data and work with a linear decision boundary.
+I generated a simple **2D binary classification dataset** using Scikit-Learn's `make_classification` and used it to visualize the data and decision boundary.
 
-The notebook then compares the decision boundary obtained from **Scikit-Learn's Logistic Regression** with a Logistic Regression model implemented manually using **Gradient Descent**.
+The notebook then compares **Scikit-Learn's Logistic Regression** with a Logistic Regression model implemented manually using **Gradient Descent**.
 
----
+### 🧠 What I Learned
 
-## 🧠 What I Learned
+#### 1. Creating a Binary Classification Dataset
 
-### 1. Creating a Binary Classification Dataset
-
-I used Scikit-Learn's `make_classification` to generate a binary classification dataset with:
+Using `make_classification` to generate a dataset with:
 
 * 100 samples
 * 2 features
@@ -216,78 +142,48 @@ I used Scikit-Learn's `make_classification` to generate a binary classification 
 * 1 informative feature
 * 1 cluster per class
 
-The dataset was intentionally created so that the classes could be visualized and separated using a linear decision boundary.
+#### 2. Logistic Regression Using Scikit-Learn
 
----
+* Training Logistic Regression.
+* Extracting coefficients.
+* Extracting the intercept.
+* Calculating the linear decision boundary.
 
-### 2. Logistic Regression Using Scikit-Learn
+#### 3. Understanding the Sigmoid Function
 
-I implemented Logistic Regression using:
-
-```python
-from sklearn.linear_model import LogisticRegression
-```
-
-I trained the model on the generated dataset and examined its:
-
-* Coefficients
-* Intercept
-
-I also used the learned coefficients and intercept to calculate the equation of the model's **linear decision boundary**.
-
----
-
-### 3. Understanding the Sigmoid Function
-
-I implemented the **Sigmoid function** manually:
+Implemented the Sigmoid function from scratch:
 
 ```python
 def sigmoid(z):
-    return 1/(1 + np.exp(-z))
+    return 1 / (1 + np.exp(-z))
 ```
 
-The sigmoid function converts the model's raw linear output into a value between **0 and 1**, which forms the basis for Logistic Regression's probability-based predictions.
+The Sigmoid function converts the raw linear output into a value between **0 and 1**, forming the basis of probability-based predictions.
 
----
+#### 4. Adding the Intercept
 
-### 4. Adding the Intercept
-
-I learned how the intercept can be incorporated into the input matrix by adding a column of ones.
-
-Conceptually:
+Learned how the intercept can be incorporated into the feature matrix by adding a column of ones:
 
 ```text
 X → [1, x₁, x₂, ...]
 ```
 
-This allows the intercept to be treated as an additional weight during the Gradient Descent process.
+#### 5. Implementing Gradient Descent From Scratch
 
----
+The custom implementation:
 
-### 5. Implementing Gradient Descent From Scratch
-
-The main focus of this notebook was creating a custom Gradient Descent implementation rather than relying entirely on Scikit-Learn.
-
-The implementation:
-
-1. Adds the intercept term to the feature matrix.
-2. Initializes the weights.
+1. Adds the intercept term.
+2. Initializes weights.
 3. Calculates the linear output.
-4. Applies the sigmoid function.
-5. Compares the predicted probabilities with the actual values.
+4. Applies the Sigmoid function.
+5. Calculates the prediction error.
 6. Calculates the gradient.
 7. Updates the weights.
 8. Repeats the process for multiple iterations.
 
-The custom implementation performs **5000 iterations** with a learning rate of **0.5**.
+#### 6. Understanding the Gradient Descent Update
 
----
-
-### 6. Understanding the Gradient Descent Update
-
-I learned how the weights can be updated using the gradient obtained from the difference between the actual values and the predicted probabilities.
-
-The implementation follows the idea:
+Understanding the iterative learning process:
 
 ```text
 Prediction
@@ -301,57 +197,151 @@ Update weights
 Repeat
 ```
 
-This helped me understand how Logistic Regression can learn its parameters iteratively instead of treating the model as a black box.
+#### 7. Comparing Scikit-Learn With My Own Implementation
 
----
-
-### 7. Comparing Scikit-Learn With My Own Implementation
-
-After training Logistic Regression using Scikit-Learn, I trained another model using my own Gradient Descent implementation.
-
-I extracted the coefficients and intercept from both approaches and calculated their respective decision boundaries.
-
-This allowed me to visually compare:
+Compared:
 
 * Scikit-Learn Logistic Regression
 * Custom Gradient Descent Logistic Regression
 
-The comparison helped reinforce the idea that a library implementation is ultimately performing the same fundamental learning process using an optimization procedure.
+by examining their learned parameters and decision boundaries.
 
----
+#### 8. Visualizing Decision Boundaries
 
-### 8. Visualizing the Decision Boundaries
-
-I plotted both decision boundaries on the same 2D dataset.
-
-This provided a visual way to compare the model trained using Scikit-Learn with the model trained using my own Gradient Descent implementation.
-
-The visualization helped connect:
+Plotted both decision boundaries on the same dataset to connect:
 
 **Weights → Decision Boundary → Classification**
 
-and made the mathematical concepts easier to understand.
+### 🔑 Key Takeaways
+
+* Creating binary classification datasets.
+* Understanding Logistic Regression.
+* Understanding the Sigmoid function.
+* Extracting coefficients and intercept.
+* Understanding how weights determine the decision boundary.
+* Understanding Gradient Descent.
+* Implementing Logistic Regression from scratch.
+* Comparing custom implementations with Scikit-Learn.
+* Visualizing decision boundaries.
 
 ---
 
-## 🔑 Key Takeaways
+## 📓 Notebook 4 — Logistic Regression & Softmax Regression
 
-From this notebook, I learned:
+### Overview
 
-* How to create a binary classification dataset using `make_classification`.
-* How Logistic Regression is implemented using Scikit-Learn.
-* How to extract Logistic Regression coefficients and intercept.
-* How the coefficients determine the linear decision boundary.
-* What the Sigmoid function does.
-* How to implement the Sigmoid function from scratch.
-* How the intercept can be incorporated into the feature matrix.
-* The basic idea behind Gradient Descent.
-* How gradients are calculated from predictions and actual values.
-* How weights are updated iteratively.
-* How to implement Logistic Regression training using Gradient Descent.
-* How to compare a custom implementation with Scikit-Learn.
-* How to visualize and compare decision boundaries.
-* How Logistic Regression builds upon the concepts learned from the Perceptron.
+This notebook extends the concepts of **Logistic Regression from binary classification to multi-class classification**.
+
+Using the **Iris dataset**, I explored how Scikit-Learn's `LogisticRegression` can automatically handle a multi-class classification problem and produce probability estimates for each class.
+
+The notebook also visualizes the learned **multi-class decision regions**.
+
+### 🧠 What I Learned
+
+#### 1. Multi-Class Classification
+
+I moved from binary classification to a problem involving **three different classes** using the Iris dataset:
+
+* Setosa
+* Versicolor
+* Virginica
+
+This helped me understand how Logistic Regression can be extended beyond two classes.
+
+#### 2. Preparing the Iris Dataset
+
+I used the Iris dataset from Seaborn and:
+
+* Encoded the categorical target using `LabelEncoder`.
+* Selected `sepal_length` and `petal_length` as features.
+* Used `species` as the target variable.
+* Split the data into training and testing sets.
+
+#### 3. Logistic Regression for Multi-Class Classification
+
+I used Scikit-Learn's:
+
+```python
+from sklearn.linear_model import LogisticRegression
+```
+
+The model automatically recognizes that the problem is **multi-class classification**.
+
+#### 4. Softmax Regression
+
+I learned the idea behind **Softmax Regression**, which extends Logistic Regression to multiple classes.
+
+Instead of producing a probability for only one class, the model produces a probability for **each possible class**.
+
+For example:
+
+```text
+Setosa       → 72.5%
+Versicolor   → 27.3%
+Virginica    → 0.04%
+```
+
+The predicted class is then the class with the highest probability.
+
+#### 5. `predict_proba()`
+
+I used:
+
+```python
+clf.predict_proba(query)
+```
+
+to obtain the probability distribution across all classes for a new input.
+
+This helped me understand the difference between:
+
+```python
+clf.predict()
+```
+
+and
+
+```python
+clf.predict_proba()
+```
+
+where `predict()` returns the predicted class while `predict_proba()` provides the probabilities for each class.
+
+#### 6. Confusion Matrix and Accuracy
+
+I evaluated the multi-class classifier using:
+
+* Accuracy Score
+* Confusion Matrix
+
+This helped me understand how classification metrics can also be applied to multi-class problems.
+
+#### 7. Decision Region Visualization
+
+Using `mlxtend`, I visualized the decision regions learned by the classifier.
+
+This made it possible to see how the feature space is divided among:
+
+```text
+Setosa
+Versicolor
+Virginica
+```
+
+and provided a geometric understanding of multi-class classification.
+
+### 🔑 Key Takeaways
+
+* Understanding the difference between binary and multi-class classification.
+* Extending Logistic Regression to multiple classes.
+* Understanding the basic idea of Softmax Regression.
+* Working with the Iris dataset.
+* Encoding categorical target variables.
+* Using `predict()` for class predictions.
+* Using `predict_proba()` for class probabilities.
+* Evaluating multi-class classification using accuracy and confusion matrix.
+* Visualizing multi-class decision regions.
+* Understanding how Logistic Regression can handle multi-class problems.
 
 ---
 
@@ -387,23 +377,56 @@ Logistic Regression From Scratch
 Scikit-Learn vs Custom Implementation
         ↓
 Decision Boundary Comparison
+        ↓
+Multi-Class Classification
+        ↓
+Softmax Regression
+        ↓
+Class Probability Prediction
+        ↓
+Confusion Matrix for Multi-Class Problems
+        ↓
+Multi-Class Decision Regions
 ```
 
 ---
 
 ## 🚀 Current Learning Status
 
-Through these notebooks, I have progressed from understanding a basic **linear classifier** to understanding the fundamental mechanics behind **Logistic Regression**.
+Through these notebooks, I have progressed from understanding a basic **linear classifier** to understanding the fundamental mechanics of **Logistic Regression**, and now towards **multi-class classification using Softmax Regression**.
 
-The next step in this learning journey is to explore the mathematical foundation behind Logistic Regression more deeply, including concepts such as:
+### Concepts Covered So Far
 
-* Logistic Regression cost/loss function
+* Binary Classification
+* Linear Decision Boundaries
+* Perceptron
+* Perceptron Trick
+* Step Function
+* Weight Updates
+* Sigmoid Function
+* Probability-Based Prediction
+* Gradient Descent
+* Logistic Regression From Scratch
+* Scikit-Learn Logistic Regression
+* Multi-Class Classification
+* Softmax Regression
+* `predict_proba()`
+* Confusion Matrix
+* Decision Region Visualization
+
+### 📌 Next Concepts to Explore
+
+The next step in this learning journey is to explore the mathematical and optimization foundations of Logistic Regression more deeply, including:
+
+* Logistic Regression Cost / Loss Function
 * Log Loss / Binary Cross-Entropy
-* Gradient calculation
+* Softmax Function Mathematics
+* Gradient Calculation
 * Optimization
-* Learning rate
-* Model convergence
-* Probability and classification threshold
+* Learning Rate
+* Model Convergence
+* Classification Threshold
 * Regularization
+* Multiclass Loss Functions
 
 This progression is helping me understand not only **how to use ML algorithms**, but also **how they work internally**.
