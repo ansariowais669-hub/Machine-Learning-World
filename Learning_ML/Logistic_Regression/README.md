@@ -2,7 +2,7 @@
 
 This folder contains my learning journey through **Logistic Regression**, starting from the basic idea of linear classification and gradually building towards understanding how Logistic Regression works internally.
 
-Each notebook in this folder focuses on a particular concept that contributes to understanding Logistic Regression, from the **Perceptron and linear decision boundaries** to implementing **Logistic Regression using Gradient Descent from scratch**, and finally extending Logistic Regression to **multi-class classification using Softmax Regression**.
+Each notebook in this folder focuses on a particular concept that contributes to understanding Logistic Regression, from the **Perceptron and linear decision boundaries** to implementing **Logistic Regression using Gradient Descent from scratch**, extending Logistic Regression to **multi-class classification using Softmax Regression**, and finally exploring **Polynomial Logistic Regression and non-linear decision boundaries**.
 
 ---
 
@@ -240,7 +240,7 @@ The notebook also visualizes the learned **multi-class decision regions**.
 
 #### 1. Multi-Class Classification
 
-I moved from binary classification to a problem involving **three different classes** using the Iris dataset:
+I moved from binary classification to a problem involving three different classes using the Iris dataset:
 
 * Setosa
 * Versicolor
@@ -345,7 +345,141 @@ and provided a geometric understanding of multi-class classification.
 
 ---
 
-## 🔗 My Learning Progression
+## 📓 Notebook 5 — Polynomial Logistic Regression
+
+### Overview
+
+This notebook extends **Logistic Regression beyond simple linear decision boundaries** by introducing **Polynomial Features**.
+
+The main idea explored in this notebook is that Logistic Regression itself still works as a linear classifier in its transformed feature space, but by creating polynomial combinations of the original features, it can learn **non-linear decision boundaries** in the original feature space.
+
+I used Scikit-Learn's `PolynomialFeatures` to transform the input data and then trained Logistic Regression on the transformed features.
+
+The notebook also explores how changing the **polynomial degree** affects the complexity of the decision boundary and demonstrates the relationship between increasing model complexity and **overfitting**.
+
+### 🧠 What I Learned
+
+#### 1. Polynomial Features
+
+I learned how polynomial feature transformation can create additional features from the original input features.
+
+For example, instead of only using:
+
+```text
+x₁, x₂
+```
+
+polynomial transformation can generate terms such as:
+
+```text
+x₁², x₁x₂, x₂², ...
+```
+
+This allows a Logistic Regression model to capture more complex relationships between the features.
+
+#### 2. Using `PolynomialFeatures`
+
+I used Scikit-Learn's:
+
+```python
+from sklearn.preprocessing import PolynomialFeatures
+```
+
+and created polynomial features using:
+
+```python
+poly = PolynomialFeatures(degree=3, include_bias=False)
+x_trf = poly.fit_transform(X)
+```
+
+This helped me understand how feature engineering can increase the expressive power of a linear model.
+
+#### 3. Polynomial Logistic Regression
+
+After transforming the features, I trained Logistic Regression on the transformed dataset.
+
+The overall process becomes:
+
+```text
+Original Features
+       ↓
+Polynomial Feature Transformation
+       ↓
+Transformed Features
+       ↓
+Logistic Regression
+       ↓
+Non-Linear Decision Boundary
+```
+
+This showed me how a model based on Logistic Regression can produce non-linear decision boundaries when the input features are transformed appropriately.
+
+#### 4. Cross-Validation
+
+I used:
+
+```python
+cross_val_score()
+```
+
+to evaluate the performance of the Logistic Regression model using **10-fold cross-validation**.
+
+This provided a way to compare the performance of Logistic Regression models using different polynomial degrees.
+
+#### 5. Visualizing Polynomial Decision Boundaries
+
+I created a reusable function to:
+
+* Transform the input features.
+* Train Logistic Regression.
+* Calculate cross-validation accuracy.
+* Generate a mesh grid.
+* Predict the class for each point in the grid.
+* Visualize the resulting decision boundary.
+
+This allowed me to visually compare decision boundaries for different polynomial degrees.
+
+#### 6. Effect of Polynomial Degree
+
+I experimented with multiple polynomial degrees, including:
+
+```text
+Degree 1
+Degree 2
+Degree 3
+Degree 4
+Degree 7
+Degree 25
+```
+
+As the degree increases, the model becomes increasingly flexible and the decision boundary becomes more complex.
+
+#### 7. Understanding Overfitting
+
+One of the main observations from this notebook was:
+
+> As the polynomial degree is increased, we move towards overfitting.
+
+A higher-degree polynomial gives the model more flexibility to fit the training data, but excessive complexity can cause the model to learn noise instead of the underlying pattern.
+
+This helped me connect **model complexity → decision boundary complexity → overfitting**.
+
+### 🔑 Key Takeaways
+
+* Understanding Polynomial Features.
+* Understanding feature transformation.
+* Extending Logistic Regression to handle non-linear patterns.
+* Using `PolynomialFeatures` from Scikit-Learn.
+* Training Logistic Regression on transformed features.
+* Using cross-validation to evaluate models.
+* Visualizing non-linear decision boundaries.
+* Understanding the effect of polynomial degree.
+* Understanding the relationship between model complexity and overfitting.
+* Seeing how feature engineering can make a linear model more expressive.
+
+---
+
+# 🔗 My Learning Progression
 
 The progression of concepts covered across the notebooks is:
 
@@ -387,13 +521,25 @@ Class Probability Prediction
 Confusion Matrix for Multi-Class Problems
         ↓
 Multi-Class Decision Regions
+        ↓
+Polynomial Features
+        ↓
+Polynomial Logistic Regression
+        ↓
+Non-Linear Decision Boundaries
+        ↓
+Cross-Validation
+        ↓
+Model Complexity
+        ↓
+Overfitting
 ```
 
 ---
 
-## 🚀 Current Learning Status
+# 🚀 Current Learning Status
 
-Through these notebooks, I have progressed from understanding a basic **linear classifier** to understanding the fundamental mechanics of **Logistic Regression**, and now towards **multi-class classification using Softmax Regression**.
+Through these notebooks, I have progressed from understanding a basic **linear classifier** to understanding the fundamental mechanics of **Logistic Regression**, multi-class classification using **Softmax Regression**, and now the use of **Polynomial Features to model non-linear decision boundaries**.
 
 ### Concepts Covered So Far
 
@@ -413,6 +559,13 @@ Through these notebooks, I have progressed from understanding a basic **linear c
 * `predict_proba()`
 * Confusion Matrix
 * Decision Region Visualization
+* Polynomial Features
+* Polynomial Logistic Regression
+* Feature Transformation
+* Cross-Validation
+* Non-Linear Decision Boundaries
+* Model Complexity
+* Overfitting
 
 ### 📌 Next Concepts to Explore
 
@@ -428,5 +581,8 @@ The next step in this learning journey is to explore the mathematical and optimi
 * Classification Threshold
 * Regularization
 * Multiclass Loss Functions
+* Bias-Variance Tradeoff
+* L1 and L2 Regularization
+* Hyperparameter Tuning
 
-This progression is helping me understand not only **how to use ML algorithms**, but also **how they work internally**.
+This progression is helping me understand not only **how to use ML algorithms**, but also **how they work internally**, how they learn decision boundaries, and how model complexity affects their ability to generalize.
